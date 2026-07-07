@@ -23,11 +23,7 @@ using a Logistic Regression model.
 # ------------------------------------
 # Load Dataset
 # ------------------------------------
-@st.cache_data
-def load_data():
-    return pd.read_csv("HR_comma_sep.csv")
-
-df = load_data()
+df = pd.read_csv("HR_comma_sep.csv")
 
 # ------------------------------------
 # Prepare Data
