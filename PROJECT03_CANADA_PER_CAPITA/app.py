@@ -25,7 +25,7 @@ st.write(
 # ----------------------------
 @st.cache_data
 def load_data():
-    return pd.read_csv("canada_per_capita_income.csv")
+    return pd.read_csv("PROJECT03_CANADA_PER_CAPITA/canada_per_capita_income.csv")
 
 df = load_data()
 
