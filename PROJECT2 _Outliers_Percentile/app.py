@@ -25,7 +25,7 @@ using the **1st and 99.9th percentile**.
 # -------------------------------
 @st.cache_data
 def load_data():
-    return pd.read_csv("AB_NYC_2019.csv")
+    return pd.read_csv("PROJECT2 _Outliers_Percentile/AB_NYC_2019.csv")
 
 try:
     df = load_data()
