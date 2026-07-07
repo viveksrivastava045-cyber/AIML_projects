@@ -59,7 +59,7 @@ st.dataframe(df, use_container_width=True)
 # Train Model
 # --------------------------------------------------
 X = df[['year']]
-y = df['per capita income (US$)']
+y = df[['per capita income (US$)']]
 
 model = LinearRegression()
 model.fit(X, y)
