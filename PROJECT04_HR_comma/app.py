@@ -23,7 +23,7 @@ using a Logistic Regression model.
 # ------------------------------------
 # Load Dataset
 # ------------------------------------
-df = pd.read_csv("HR_comma_sep.csv")
+df = pd.read_csv("PROJECT04_HR_comma/HR_comma_sep.csv")
 
 # ------------------------------------
 # Prepare Data
