@@ -4,7 +4,7 @@ from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 
 # Load dataset
-df = pd.read_csv("canada_per_capita_income.csv")
+df = pd.read_csv("PROJECT3- CANADA per capita income/canada_per_capita_income.csv")
 
 # Display first five rows
 print(df.head())
