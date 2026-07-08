@@ -49,7 +49,7 @@ Predict Future Income using <b>Machine Learning</b> 🤖
 # --------------------------------------------------
 # Load Dataset
 # --------------------------------------------------
-df = pd.read_csv("canada_per_capita_income.csv")
+df = pd.read_csv("PROJECT_03_CANADA_per_capita_income/canada_per_capita_income.csv")
 
 # Display Dataset
 st.subheader("📊 Dataset")
