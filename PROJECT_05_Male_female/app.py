@@ -8,7 +8,7 @@ from PIL import Image
 @st.cache_resource
 def load_model():
     # Make sure 'male_female_model.pkl' is in the same directory
-    return joblib.load("male_female_model.pkl")
+    return joblib.load("PROJECT_05_Male_female/male_female_model.pkl")
 
 try:
     model = load_model()
