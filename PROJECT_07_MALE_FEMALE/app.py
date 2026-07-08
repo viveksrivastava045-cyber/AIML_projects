@@ -17,7 +17,7 @@ st.set_page_config(
 # -----------------------------
 model = tf.keras.models.load_model("PROJECT_07_MALE_FEMALE/gender_cnn_model.keras")
 
-labels = np.load("labels.npy", allow_pickle=True).item()
+labels = np.load("labels.npy",).item()  #allow_pickle=True
 
 class_names = list(labels.keys())
 
