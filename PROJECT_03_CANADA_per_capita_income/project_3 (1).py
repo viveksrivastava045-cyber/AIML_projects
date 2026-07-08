@@ -105,7 +105,7 @@ col1, col2 = st.columns(2)
 with col1:
     st.markdown("### 👤 Developer")
     st.write("**Vivek Srivastava**")
-    st.write("B.Tech CSE (AI & ML)")
+    st.write("B.Tech IT ")
     st.write("Machine Learning & Data Science Enthusiast")
 
 with col2:
