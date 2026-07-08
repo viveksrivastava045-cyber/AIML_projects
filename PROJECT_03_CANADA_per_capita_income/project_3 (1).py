@@ -123,8 +123,10 @@ with col1:
 with col2:
     st.markdown("### 🔗 Connect with Me")
     st.markdown("[💼 LinkedIn](https://# ----------------------------
+# ----------------------------
 # Developer Corner
 # ----------------------------
+
 st.markdown("---")
 st.subheader("👨‍💻 Developer Corner")
 
@@ -138,9 +140,8 @@ with col1:
 
 with col2:
     st.markdown("### 🔗 Connect with Me")
-    st.markdown("[💼 LinkedIn](https://www.linkedin.com/in/vivek-srivastava-0a878a329)")
-    st.markdown("[💻 GitHub](https://github.com/viveksrivastava045-cyber/AIML_projects.git)")
-
+    st.markdown("[💼 LinkedIn](https://www.linkedin.com/in/YOUR-LINKEDIN-USERNAME)")
+    st.markdown("[💻 GitHub](https://github.com/YOUR-GITHUB-USERNAME)")
 
 st.markdown("---")
 st.caption("Made with ❤️ using Python, Scikit-Learn & Streamlit")
