@@ -158,10 +158,10 @@ text-align:center;
 box-shadow:0px 4px 15px rgba(0,0,0,0.3);
 ">
 
-<h2 style="color:#38BDF8;">👨‍💻 Richeek Pandey</h2>
+<h2 style="color:#38BDF8;">👨‍💻 VIVEK KUMAR SRIVASTAVA </h2>
 
 <h4 style="color:#F8FAFC;">
-📊 Aspiring Data Scientist | Machine Learning Enthusiast
+📊 Aspiring Data Engineer | Machine Learning Enthusiast
 </h4>
 
 <p style="color:#CBD5E1; font-size:16px;">
@@ -174,14 +174,14 @@ This application was built using
 </p>
 
 <p style="font-size:18px;">
-<a href="https://www.linkedin.com/in/richeek-pandey-9954783a9" target="_blank"
+<a href="www.linkedin.com/in/vivek-srivastava-0a878a329" target="_blank"
 style="text-decoration:none;color:#38BDF8;">
 💼 LinkedIn
 </a>
 
 &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 
-<a href="https://github.com/richeekpandey07" target="_blank"
+<a href="https://github.com/viveksrivastava045-cyber/AIML_projects.git" target="_blank"
 style="text-decoration:none;color:#22C55E;">
 💻 GitHub
 </a>
