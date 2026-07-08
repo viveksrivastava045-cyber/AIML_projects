@@ -25,7 +25,7 @@ using a Logistic Regression model.
 # ------------------------------------
 @st.cache_data
 def load_data():
-    return pd.read_csv("HR_comma_sep.csv")
+    return pd.read_csv("PROJECT_04_HR_comma/HR_comma_sep.csv")
 
 df = load_data()
 
