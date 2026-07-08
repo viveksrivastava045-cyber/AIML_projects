@@ -63,15 +63,25 @@ if uploaded_file is not None:
             
             # Output Results
             st.success(f"**Prediction:** {predicted_class}{conf_text}")
+# ----------------------------
+# Developer Corner
+# ----------------------------
+
 st.markdown("---")
+st.subheader("👨‍💻 Developer Corner")
 
-st.markdown("""
-<center>
+col1, col2 = st.columns(2)
 
-Made with ❤️ by **Vivek Srivastava**
+with col1:
+    st.markdown("### 👤 Developer")
+    st.write("**Vivek Srivastava**")
+    st.write("B.Tech IT ")
+    st.write("Machine Learning & Data Science Enthusiast")
 
-[LinkedIn](https://www.linkedin.com/in/vivek-srivastava-0a878a329/) |
-[GitHub](https://github.com/viveksrivastava045-cyber/AIML_projects/edit/main/PROJECT_05_Male_female)
+with col2:
+    st.markdown("### 🔗 Connect with Me")
+    st.markdown("[💼 LinkedIn](https://www.linkedin.com/in/vivek-srivastava-0a878a329)")
+    st.markdown("[💻 GitHub](https://github.com/viveksrivastava045-cyber/AIML_projects/edit/main/PROJECT_03_CANADA_per_capita_income)")
 
-</center>
-""", unsafe_allow_html=True)
+st.markdown("---")
+st.caption("Made with ❤️ using Python, Scikit-Learn & Streamlit")
