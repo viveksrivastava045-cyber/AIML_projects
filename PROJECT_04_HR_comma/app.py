@@ -130,3 +130,25 @@ if st.checkbox("Show Dataset"):
 
 st.markdown("---")
 st.caption("Developed using Streamlit & Scikit-Learn")
+# ----------------------------
+# Developer Corner
+# ----------------------------
+
+st.markdown("---")
+st.subheader("👨‍💻 Developer Corner")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.markdown("### 👤 Developer")
+    st.write("**Vivek Srivastava**")
+    st.write("B.Tech IT ")
+    st.write("Machine Learning & Data Science Enthusiast")
+
+with col2:
+    st.markdown("### 🔗 Connect with Me")
+    st.markdown("[💼 LinkedIn](https://www.linkedin.com/in/vivek-srivastava-0a878a329)")
+    st.markdown("[💻 GitHub](https://github.com/viveksrivastava045-cyber/AIML_projects/edit/main/PROJECT_04_HR_comma)")
+
+st.markdown("---")
+st.caption("Made with ❤️ using Python, Scikit-Learn & Streamlit")
