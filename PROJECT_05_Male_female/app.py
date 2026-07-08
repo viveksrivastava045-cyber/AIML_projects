@@ -63,3 +63,15 @@ if uploaded_file is not None:
             
             # Output Results
             st.success(f"**Prediction:** {predicted_class}{conf_text}")
+st.markdown("---")
+
+st.markdown("""
+<center>
+
+Made with ❤️ by **Vivek Srivastava**
+
+[LinkedIn](https://linkedin.com/in/yourprofile) |
+[GitHub](https://github.com/yourgithub)
+
+</center>
+""", unsafe_allow_html=True)
