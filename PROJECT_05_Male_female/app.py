@@ -70,8 +70,8 @@ st.markdown("""
 
 Made with ❤️ by **Vivek Srivastava**
 
-[LinkedIn](https://linkedin.com/in/yourprofile) |
-[GitHub](https://github.com/yourgithub)
+[LinkedIn](https://www.linkedin.com/in/vivek-srivastava-0a878a329/) |
+[GitHub](https://github.com/viveksrivastava045-cyber/AIML_projects/edit/main/PROJECT_05_Male_female)
 
 </center>
 """, unsafe_allow_html=True)
