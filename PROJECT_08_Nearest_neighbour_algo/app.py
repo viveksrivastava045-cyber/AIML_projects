@@ -14,6 +14,22 @@ st.set_page_config(
     page_icon="🌸",
     layout="wide"
 )
+# ---------------------------------------------
+# ABOUT
+# ---------------------------------------------
+st.write("")
+
+st.info("""
+### About Project
+
+This application predicts the Iris flower species using the K-Nearest Neighbors (KNN) Machine Learning algorithm.
+
+**Dataset:** Iris Dataset
+
+**Algorithm:** KNN Classifier
+
+**Libraries:** Scikit-Learn • Pandas • Streamlit
+""")
 
 # ---------------------------------------------
 # CUSTOM CSS
