@@ -72,10 +72,10 @@ def predict(img):
     probability = float(prediction[0][0])
 
     if probability > 0.5:
-        label = "👨 Male Eye"
+        label = "👩 Female Eye"
         confidence = probability
     else:
-        label = "👩 Female Eye"
+        label = "👨 Male Eye"
         confidence = 1 - probability
 
     return label, confidence
