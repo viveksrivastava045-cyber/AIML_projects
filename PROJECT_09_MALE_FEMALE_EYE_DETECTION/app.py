@@ -13,196 +13,357 @@ st.set_page_config(
 )
 
 st.markdown("""
+
 <style>
 
-/* Hide Streamlit Branding */
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
-header {visibility: hidden;}
+/* -------------------------
+Hide Streamlit Branding
+--------------------------*/
 
-/* Main App */
+#MainMenu{
+visibility:hidden;
+}
+
+footer{
+visibility:hidden;
+}
+
+header{
+visibility:hidden;
+}
+
+/* -------------------------
+Background
+--------------------------*/
+
 .stApp{
-  background: #5151f0;
-background: linear-gradient(90deg, rgba(81, 81, 240, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);;
+
+background:linear-gradient(
+135deg,
+#4F46E5 0%,
+#1E1B8F 45%,
+#0284C7 75%,
+#22D3EE 100%
+);
+
+background-attachment:fixed;
+
 }
 
-/* Reduce top spacing */
+/* -------------------------
+Main Container
+--------------------------*/
+
 .block-container{
-    padding-top:2rem;
-    padding-bottom:2rem;
-    max-width:1200px;
+
+padding-top:2rem;
+padding-bottom:2rem;
+max-width:1200px;
+
 }
 
-/* Hero Banner */
+/* -------------------------
+Hero Banner
+--------------------------*/
+
 .hero{
-    background:linear-gradient(90deg,#2563EB,#1D4ED8);
-    padding:35px;
-    border-radius:20px;
-    text-align:center;
-    color:white;
-    box-shadow:0px 8px 20px rgba(37,99,235,0.25);
-    margin-bottom:30px;
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(20px);
+
+border:1px solid rgba(255,255,255,.15);
+
+padding:35px;
+
+border-radius:25px;
+
+box-shadow:0 15px 40px rgba(0,0,0,.25);
+
+text-align:center;
+
 }
 
 .hero h1{
-    font-size:42px;
-    margin:0;
-    font-weight:700;
+
+font-size:52px;
+
+font-weight:700;
+
+margin:0;
+
+color:#FFFFFF;
+
 }
 
 .hero p{
-    font-size:18px;
-    margin-top:8px;
-    opacity:0.95;
+
+margin-top:12px;
+
+font-size:22px;
+
+color:#E0F2FE;
+
 }
 
-/* Cards */
+/* -------------------------
+Cards
+--------------------------*/
+
 .card{
-    background:#FFFFFF;
-    padding:25px;
-    border-radius:18px;
-    border:1px solid #E5E7EB;
-    box-shadow:0 6px 20px rgba(0,0,0,.06);
-    margin-top:20px;
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(18px);
+
+border-radius:25px;
+
+padding:25px;
+
+border:1px solid rgba(255,255,255,.15);
+
+box-shadow:0 15px 35px rgba(0,0,0,.20);
+
+margin-top:20px;
+
 }
 
-/* Prediction Card */
+/* -------------------------
+Prediction Card
+--------------------------*/
+
 .result-card{
-    background:#F8FAFC;
-    border-left:6px solid #2563EB;
-    border-radius:18px;
-    padding:30px;
-    text-align:center;
-    box-shadow:0 6px 18px rgba(0,0,0,.05);
+
+background:rgba(255,255,255,.10);
+
+backdrop-filter:blur(20px);
+
+padding:30px;
+
+border-radius:20px;
+
+border:1px solid rgba(255,255,255,.15);
+
+text-align:center;
+
+box-shadow:0 15px 30px rgba(0,0,0,.20);
+
 }
 
-.result-card h2{
-    color:#374151;
-    margin-bottom:15px;
+/* -------------------------
+Gradient Text
+--------------------------*/
+
+.gradient-text{
+
+background:linear-gradient(
+90deg,
+#FDE68A,
+#FFFFFF,
+#93C5FD
+);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+font-weight:800;
+
 }
 
-.result{
-    font-size:36px;
-    font-weight:700;
-    color:#2563EB;
-    margin-bottom:15px;
+/* -------------------------
+Upload Heading
+--------------------------*/
+
+.upload-title{
+
+font-size:34px;
+
+font-weight:700;
+
+color:white;
+
 }
 
-/* Confidence */
-.confidence{
-    font-size:20px;
-    font-weight:600;
-    color:#111827;
-}
+/* -------------------------
+File Uploader
+--------------------------*/
 
-/* Image */
-.stImage img{
-    border-radius:18px;
-    border:2px solid #E5E7EB;
-    box-shadow:0px 6px 18px rgba(0,0,0,.08);
-}
-
-/* File Uploader */
 [data-testid="stFileUploader"]{
-    border:2px dashed #2563EB;
-    border-radius:18px;
-    padding:20px;
-    background:#F8FAFC;
+
+background:rgba(255,255,255,.08);
+
+border:2px dashed rgba(255,255,255,.40);
+
+border-radius:22px;
+
+padding:18px;
+
 }
 
-/* Buttons */
+[data-testid="stFileUploader"] section{
+
+background:transparent !important;
+
+}
+
+[data-testid="stFileUploaderDropzone"]{
+
+background:transparent !important;
+
+border:none !important;
+
+}
+
+/* -------------------------
+Image
+--------------------------*/
+
+.stImage img{
+
+border-radius:20px;
+
+border:3px solid rgba(255,255,255,.20);
+
+box-shadow:0px 10px 25px rgba(0,0,0,.30);
+
+}
+
+/* -------------------------
+Success Box
+--------------------------*/
+
+.stAlert{
+
+background:rgba(34,197,94,.15)!important;
+
+border:1px solid rgba(34,197,94,.35)!important;
+
+color:white!important;
+
+}
+
+/* -------------------------
+Metric
+--------------------------*/
+
+[data-testid="metric-container"]{
+
+background:rgba(255,255,255,.08);
+
+border:1px solid rgba(255,255,255,.15);
+
+border-radius:20px;
+
+color:white;
+
+box-shadow:0px 8px 25px rgba(0,0,0,.18);
+
+}
+
+/* -------------------------
+Progress Bar
+--------------------------*/
+
+.stProgress>div>div>div{
+
+background:linear-gradient(
+90deg,
+#22C55E,
+#14B8A6,
+#06B6D4
+);
+
+}
+
+/* -------------------------
+Buttons
+--------------------------*/
+
 .stButton>button{
-    background:#2563EB;
-    color:white;
-    border:none;
-    border-radius:10px;
-    font-weight:600;
-    transition:0.3s;
+
+background:linear-gradient(
+90deg,
+#3B82F6,
+#2563EB
+);
+
+color:white;
+
+border:none;
+
+border-radius:12px;
+
+font-weight:600;
+
+transition:.3s;
+
 }
 
 .stButton>button:hover{
-    background:#1D4ED8;
-    transform:translateY(-2px);
+
+transform:translateY(-3px);
+
+box-shadow:0 10px 20px rgba(0,0,0,.30);
+
 }
 
-/* Progress Bar */
-.stProgress > div > div > div > div{
-    background:#2563EB;
-}
+/* -------------------------
+Developer Card
+--------------------------*/
 
-/* Metrics */
-[data-testid="metric-container"]{
-    background:white;
-    border-radius:15px;
-    border:1px solid #E5E7EB;
-    padding:15px;
-    box-shadow:0px 4px 12px rgba(0,0,0,.05);
-}
-
-/* Developer Card */
 .developer{
-    background:white;
-    border-radius:20px;
-    padding:25px;
-    border:1px solid #E5E7EB;
-    box-shadow:0px 6px 18px rgba(0,0,0,.06);
-    margin-top:30px;
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(18px);
+
+border-radius:22px;
+
+padding:30px;
+
+border:1px solid rgba(255,255,255,.15);
+
+box-shadow:0 12px 30px rgba(0,0,0,.20);
+
+color:white;
+
 }
 
-.developer h2{
-    color:#2563EB;
-    text-align:center;
+.developer a{
+
+color:#93C5FD;
+
+text-decoration:none;
+
+font-weight:700;
+
 }
 
-.developer p{
-    font-size:17px;
-    color:#374151;
-    line-height:1.8;
+.developer a:hover{
+
+color:white;
+
 }
 
-/* Links */
-a{
-    color:#2563EB;
-    text-decoration:none;
-    font-weight:600;
-}
+/* -------------------------
+Footer
+--------------------------*/
 
-a:hover{
-    color:#1D4ED8;
-    text-decoration:underline;
-}
-
-/* Footer */
 .footer{
-    text-align:center;
-    margin-top:30px;
-    color:#6B7280;
-    font-size:15px;
-}
 
-/* Responsive */
-@media (max-width:768px){
+text-align:center;
 
-.hero h1{
-    font-size:30px;
-}
+color:#E0F2FE;
 
-.hero p{
-    font-size:16px;
-}
+font-size:15px;
 
-.result{
-    font-size:28px;
-}
-
-.card{
-    padding:18px;
-}
+margin-top:30px;
 
 }
-
 
 </style>
+
 """, unsafe_allow_html=True)
 st.markdown("""
 <div class='hero'>
