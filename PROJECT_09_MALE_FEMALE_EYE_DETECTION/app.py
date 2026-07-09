@@ -156,6 +156,14 @@ with col2:
     st.markdown("[💻 GitHub](https://github.com/viveksrivastava045-cyber/AIML_projects/edit/main/PROJECT_03_CANADA_per_capita_income)")
 
 st.markdown("---")
-st.caption("Made with ❤️ using Python, Scikit-Learn & Streamlit")
+st.markdown("---")
+
+st.markdown(
+"""
+<center>
+Made with ❤️ using TensorFlow & Streamlit
+</center>
+""",
 unsafe_allow_html=True
 )
+
