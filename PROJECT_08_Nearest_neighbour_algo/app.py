@@ -214,8 +214,7 @@ with col2:
     st.markdown("[💼 LinkedIn](https://www.linkedin.com/in/vivek-srivastava-0a878a329)")
     st.markdown("[💻 GitHub](https://github.com/viveksrivastava045-cyber/AIML_projects/edit/main/PROJECT_03_CANADA_per_capita_income)")
 
-st.markdown("---")
-st.caption("Made with ❤️ using Python, Scikit-Learn & Streamlit")
+
 
 st.markdown("""
 <div class='footer'>
