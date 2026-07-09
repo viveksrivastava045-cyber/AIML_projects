@@ -1,15 +1,19 @@
-PROJECT_03 : CANADA_PER_CAPITA_INCOME : URL-> 
+PROJECT_03 : CANADA_PER_CAPITA_INCOME : 
 
-https://aimlprojects-kuhwr4vikm84sagpzt3jsi.streamlit.app/
+Click here -> https://aimlprojects-kuhwr4vikm84sagpzt3jsi.streamlit.app/
 
-PROJECT_04 : Employee Retention Prediction : URL-> 
+PROJECT_04 : Employee Retention Prediction : 
 
-https://aimlprojects-aztmiosna8shppcuu5bw3w.streamlit.app/
+Click here -> https://aimlprojects-aztmiosna8shppcuu5bw3w.streamlit.app/
 
-PROJECT_06 : Iris Flower Clustering using K-Means : URL-> 
+PROJECT_05 :  Male / Female Gender Classification App : 
 
-https://aimlprojects-6txej24jnnaey9krc4hzbp.streamlit.app/
+Click here -> https://aimlprojects-fusdltygt7pmcp2fzhzfes.streamlit.app/
 
-PROJECT_06 :  Male / Female Gender Classification App : URL->
+PROJECT_06 : Iris Flower Clustering using K-Means : 
 
-https://aimlprojects-fusdltygt7pmcp2fzhzfes.streamlit.app/
+Click here -> https://aimlprojects-6txej24jnnaey9krc4hzbp.streamlit.app/
+
+PROJECT_O7 : Gender Classification AI App : 
+
+Click here -> https://aimlprojects-zwehmqimri7bzyrn56k9vy.streamlit.app/
