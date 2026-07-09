@@ -210,23 +210,27 @@ with right:
             ],
             "Value":[sl,sw,pl,pw]
         }))
+# Developer Corner
+# ----------------------------
 
-# ---------------------------------------------
-# ABOUT
-# ---------------------------------------------
-st.write("")
+st.markdown("---")
+st.subheader("👨‍💻 Developer Corner")
 
-st.info("""
-### About Project
+col1, col2 = st.columns(2)
 
-This application predicts the Iris flower species using the K-Nearest Neighbors (KNN) Machine Learning algorithm.
+with col1:
+    st.markdown("### 👤 Developer")
+    st.write("**Vivek Srivastava**")
+    st.write("B.Tech IT ")
+    st.write("Machine Learning & Data Science Enthusiast")
 
-**Dataset:** Iris Dataset
+with col2:
+    st.markdown("### 🔗 Connect with Me")
+    st.markdown("[💼 LinkedIn](https://www.linkedin.com/in/vivek-srivastava-0a878a329)")
+    st.markdown("[💻 GitHub](https://github.com/viveksrivastava045-cyber/AIML_projects/edit/main/PROJECT_03_CANADA_per_capita_income)")
 
-**Algorithm:** KNN Classifier
-
-**Libraries:** Scikit-Learn • Pandas • Streamlit
-""")
+st.markdown("---")
+st.caption("Made with ❤️ using Python, Scikit-Learn & Streamlit")
 
 st.markdown("""
 <div class='footer'>
