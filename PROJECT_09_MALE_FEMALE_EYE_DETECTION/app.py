@@ -12,372 +12,42 @@ st.set_page_config(
     layout="wide"
 )
 
+# ------------------------------
+# Custom CSS
+# ------------------------------
 st.markdown("""
-
 <style>
-
-/* -------------------------
-Hide Streamlit Branding
---------------------------*/
-
-#MainMenu{
-visibility:hidden;
+.main{
+    background:#F8FAFC;
 }
-
-footer{
-visibility:hidden;
+.title{
+    text-align:center;
+    font-size:42px;
+    font-weight:bold;
+    color:#1E3A8A;
 }
-
-header{
-visibility:hidden;
+.subtitle{
+    text-align:center;
+    font-size:18px;
+    color:gray;
 }
-
-/* -------------------------
-Background
---------------------------*/
-
-.stApp{
-
-background:linear-gradient(
-135deg,
-#4F46E5 0%,
-#1E1B8F 45%,
-#0284C7 75%,
-#22D3EE 100%
-);
-
-background-attachment:fixed;
-
+.result{
+    font-size:30px;
+    font-weight:bold;
+    text-align:center;
 }
-
-/* -------------------------
-Main Container
---------------------------*/
-
-.block-container{
-
-padding-top:2rem;
-padding-bottom:2rem;
-max-width:1200px;
-
-}
-
-/* -------------------------
-Hero Banner
---------------------------*/
-
-.hero{
-
-background:rgba(255,255,255,.08);
-
-backdrop-filter:blur(20px);
-
-border:1px solid rgba(255,255,255,.15);
-
-padding:35px;
-
-border-radius:25px;
-
-box-shadow:0 15px 40px rgba(0,0,0,.25);
-
-text-align:center;
-
-}
-
-.hero h1{
-
-font-size:52px;
-
-font-weight:700;
-
-margin:0;
-
-color:#FFFFFF;
-
-}
-
-.hero p{
-
-margin-top:12px;
-
-font-size:22px;
-
-color:#E0F2FE;
-
-}
-
-/* -------------------------
-Cards
---------------------------*/
-
-.card{
-
-background:rgba(255,255,255,.08);
-
-backdrop-filter:blur(18px);
-
-border-radius:25px;
-
-padding:25px;
-
-border:1px solid rgba(255,255,255,.15);
-
-box-shadow:0 15px 35px rgba(0,0,0,.20);
-
-margin-top:20px;
-
-}
-
-/* -------------------------
-Prediction Card
---------------------------*/
-
-.result-card{
-
-background:rgba(255,255,255,.10);
-
-backdrop-filter:blur(20px);
-
-padding:30px;
-
-border-radius:20px;
-
-border:1px solid rgba(255,255,255,.15);
-
-text-align:center;
-
-box-shadow:0 15px 30px rgba(0,0,0,.20);
-
-}
-
-/* -------------------------
-Gradient Text
---------------------------*/
-
-.gradient-text{
-
-background:linear-gradient(
-90deg,
-#FDE68A,
-#FFFFFF,
-#93C5FD
-);
-
--webkit-background-clip:text;
-
--webkit-text-fill-color:transparent;
-
-font-weight:800;
-
-}
-
-/* -------------------------
-Upload Heading
---------------------------*/
-
-.upload-title{
-
-font-size:34px;
-
-font-weight:700;
-
-color:white;
-
-}
-
-/* -------------------------
-File Uploader
---------------------------*/
-
-[data-testid="stFileUploader"]{
-
-background:rgba(255,255,255,.08);
-
-border:2px dashed rgba(255,255,255,.40);
-
-border-radius:22px;
-
-padding:18px;
-
-}
-
-[data-testid="stFileUploader"] section{
-
-background:transparent !important;
-
-}
-
-[data-testid="stFileUploaderDropzone"]{
-
-background:transparent !important;
-
-border:none !important;
-
-}
-
-/* -------------------------
-Image
---------------------------*/
-
-.stImage img{
-
-border-radius:20px;
-
-border:3px solid rgba(255,255,255,.20);
-
-box-shadow:0px 10px 25px rgba(0,0,0,.30);
-
-}
-
-/* -------------------------
-Success Box
---------------------------*/
-
-.stAlert{
-
-background:rgba(34,197,94,.15)!important;
-
-border:1px solid rgba(34,197,94,.35)!important;
-
-color:white!important;
-
-}
-
-/* -------------------------
-Metric
---------------------------*/
-
-[data-testid="metric-container"]{
-
-background:rgba(255,255,255,.08);
-
-border:1px solid rgba(255,255,255,.15);
-
-border-radius:20px;
-
-color:white;
-
-box-shadow:0px 8px 25px rgba(0,0,0,.18);
-
-}
-
-/* -------------------------
-Progress Bar
---------------------------*/
-
-.stProgress>div>div>div{
-
-background:linear-gradient(
-90deg,
-#22C55E,
-#14B8A6,
-#06B6D4
-);
-
-}
-
-/* -------------------------
-Buttons
---------------------------*/
-
-.stButton>button{
-
-background:linear-gradient(
-90deg,
-#3B82F6,
-#2563EB
-);
-
-color:white;
-
-border:none;
-
-border-radius:12px;
-
-font-weight:600;
-
-transition:.3s;
-
-}
-
-.stButton>button:hover{
-
-transform:translateY(-3px);
-
-box-shadow:0 10px 20px rgba(0,0,0,.30);
-
-}
-
-/* -------------------------
-Developer Card
---------------------------*/
-
-.developer{
-
-background:rgba(255,255,255,.08);
-
-backdrop-filter:blur(18px);
-
-border-radius:22px;
-
-padding:30px;
-
-border:1px solid rgba(255,255,255,.15);
-
-box-shadow:0 12px 30px rgba(0,0,0,.20);
-
-color:white;
-
-}
-
-.developer a{
-
-color:#93C5FD;
-
-text-decoration:none;
-
-font-weight:700;
-
-}
-
-.developer a:hover{
-
-color:white;
-
-}
-
-/* -------------------------
-Footer
---------------------------*/
-
-.footer{
-
-text-align:center;
-
-color:#E0F2FE;
-
-font-size:15px;
-
-margin-top:30px;
-
-}
-
 </style>
+""", unsafe_allow_html=True)
 
-""", unsafe_allow_html=True)
-st.markdown("""
-<div class='hero'>
-<h1>👁️ Male & Female Eye Detection</h1>
-<p>Deep Learning • TensorFlow • Streamlit</p>
-</div>
-""", unsafe_allow_html=True)
-  
+st.markdown("<div class='title'>👁️ Male & Female Eye Detection</div>", unsafe_allow_html=True)
+st.markdown("<div class='subtitle'>Deep Learning | TensorFlow | Streamlit</div>", unsafe_allow_html=True)
+
 # ------------------------------
 # Load Model
 # ------------------------------
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model("PROJECT_09_MALE_FEMALE_EYE_DETECTION/my_model.keras")
+    return tf.keras.models.load_model("my_model.keras")
 
 model = load_model()
 
@@ -402,29 +72,22 @@ def predict(img):
     probability = float(prediction[0][0])
 
     if probability > 0.5:
-        label = "👩 Female Eye"
+        label = "👨 Male Eye"
         confidence = probability
     else:
-        label = "👨 Male Eye"
+        label = "👩 Female Eye"
         confidence = 1 - probability
 
     return label, confidence
 
 
-
 # ------------------------------
 # Upload Image
 # ------------------------------
-st.markdown("<div class='card'>", unsafe_allow_html=True)
-
-st.subheader("📤 Upload Eye Image")
-
 uploaded = st.file_uploader(
-    "Choose an image",
+    "Upload an Eye Image",
     type=["jpg","jpeg","png"]
 )
-
-st.markdown("</div>", unsafe_allow_html=True)
 
 if uploaded:
 
@@ -440,28 +103,22 @@ if uploaded:
         label, confidence = predict(image)
 
     with col2:
-        st.markdown(f"""
-<div class="prediction-card">
 
-<h2>🎯 Prediction Result</h2>
+        st.success("Prediction Completed")
 
-<div class="prediction-label">
-{label}
-</div>
+        st.markdown(
+            f"<div class='result'>{label}</div>",
+            unsafe_allow_html=True
+        )
 
-<div class="prediction-confidence">
+        st.metric(
+            "Confidence",
+            f"{confidence*100:.2f}%"
+        )
 
-{confidence*100:.2f}% Confidence
+        st.progress(float(confidence))
 
-</div>
-
-</div>
-""", unsafe_allow_html=True)
-
-st.progress(confidence)
-
-
-
+st.markdown("---")
 # ----------------------------
 # Developer Corner
 # ----------------------------
@@ -483,8 +140,6 @@ with col2:
     st.markdown("[💻 GitHub](https://github.com/viveksrivastava045-cyber/AIML_projects/edit/main/PROJECT_03_CANADA_per_capita_income)")
 
 st.markdown("---")
-st.markdown("---")
-
 st.markdown(
 """
 <center>
@@ -493,4 +148,3 @@ Made with ❤️ using TensorFlow & Streamlit
 """,
 unsafe_allow_html=True
 )
-
