@@ -93,7 +93,7 @@ df["Species"] = [iris.target_names[i] for i in iris.target]
 st.write("")
 
 st.info("""
-### About Project
+## About Project
 
 This application predicts the Iris flower species using the K-Nearest Neighbors (KNN) Machine Learning algorithm.
 
