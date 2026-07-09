@@ -410,23 +410,7 @@ def predict(img):
 
     return label, confidence
 
-# ------------------------------
-# Sidebar
-# ------------------------------
-st.sidebar.header("About")
 
-st.sidebar.info(
-"""
-### Model Information
-
-- CNN Model
-- Image Size : 299x299
-- Binary Classification
-- Classes:
-  - Male Eye
-  - Female Eye
-"""
-)
 
 # ------------------------------
 # Upload Image
@@ -456,20 +440,27 @@ if uploaded:
         label, confidence = predict(image)
 
     with col2:
+        st.markdown(f"""
+<div class="prediction-card">
 
-        st.success("Prediction Completed")
+<h2>🎯 Prediction Result</h2>
 
-        st.markdown(
-            f"<div class='result'>{label}</div>",
-            unsafe_allow_html=True
-        )
+<div class="prediction-label">
+{label}
+</div>
 
-        st.metric(
-            "Confidence",
-            f"{confidence*100:.2f}%"
-        )
+<div class="prediction-confidence">
 
-        st.progress(float(confidence))
+{confidence*100:.2f}% Confidence
+
+</div>
+
+</div>
+""", unsafe_allow_html=True)
+
+st.progress(confidence)
+
+
 
 # ----------------------------
 # Developer Corner
