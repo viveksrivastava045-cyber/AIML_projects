@@ -47,7 +47,7 @@ st.markdown("<div class='subtitle'>Deep Learning | TensorFlow | Streamlit</div>"
 # ------------------------------
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model("my_model.keras")
+    return tf.keras.models.load_model("PROJECT_09_MALE_FEMALE_EYE_DETECTION/my_model.keras")
 
 model = load_model()
 
