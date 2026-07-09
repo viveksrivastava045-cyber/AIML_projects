@@ -9,3 +9,7 @@ https://aimlprojects-aztmiosna8shppcuu5bw3w.streamlit.app/
 PROJECT_06 : Iris Flower Clustering using K-Means : URL-> 
 
 https://aimlprojects-6txej24jnnaey9krc4hzbp.streamlit.app/
+
+PROJECT_06 :  Male / Female Gender Classification App : URL->
+
+https://aimlprojects-fusdltygt7pmcp2fzhzfes.streamlit.app/
