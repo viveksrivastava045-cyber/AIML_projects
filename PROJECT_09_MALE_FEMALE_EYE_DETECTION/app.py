@@ -25,7 +25,7 @@ header {visibility:hidden;}
 }
 
 .stApp{
-    background:linear-gradient(135deg,#EEF5FF,#FFFFFF);
+    background: purple;
 }
 
 .hero{
