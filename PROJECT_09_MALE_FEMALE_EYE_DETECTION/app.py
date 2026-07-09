@@ -25,7 +25,8 @@ header {visibility:hidden;}
 }
 
 .stApp{
-    background: meganta;
+    background: #5151f0;
+background: linear-gradient(90deg, rgba(81, 81, 240, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
 }
 
 .hero{
@@ -48,7 +49,7 @@ header {visibility:hidden;}
 }
 
 .card{
-    background:white;
+    background:;
     padding:25px;
     border-radius:18px;
     box-shadow:0px 8px 20px rgba(0,0,0,.08);
