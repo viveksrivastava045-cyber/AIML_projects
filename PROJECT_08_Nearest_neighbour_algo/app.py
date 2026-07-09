@@ -112,7 +112,7 @@ accuracy=model.score(X_test,y_test)
 # SIDEBAR
 # ---------------------------------------------
 st.sidebar.image(
-"https://upload.wikimedia.org/wikipedia/commons/5/56/Iris_versicolor_3.jpg",
+"PROJECT_08_Nearest_neighbour_algo/Blue_Flag,_Ottawa.jpg",
 use_container_width=True
 )
 
