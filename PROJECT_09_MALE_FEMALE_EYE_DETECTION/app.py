@@ -22,7 +22,8 @@ header {visibility: hidden;}
 
 /* Main App */
 .stApp{
-    background-color:#FFFFFF;
+  background: #5151f0;
+background: linear-gradient(90deg, rgba(81, 81, 240, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);;
 }
 
 /* Reduce top spacing */
