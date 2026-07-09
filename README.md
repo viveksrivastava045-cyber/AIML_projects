@@ -22,4 +22,6 @@ PROJECT_O8 : Iris Flower Classification using K-Nearest Neighbors :
 
 Click here -> https://aimlprojects-vjqqgcc6c5ui8ckwfgosu5.streamlit.app/
 
+PROJECT_O9 :  Male & Female Eye Detection : 
 
+Click here -> https://aimlprojects-5inz8p2exkofydajtxd9ya.streamlit.app/
