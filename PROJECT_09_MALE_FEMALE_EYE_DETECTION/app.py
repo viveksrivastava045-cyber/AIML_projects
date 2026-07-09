@@ -72,10 +72,10 @@ def predict(img):
     probability = float(prediction[0][0])
 
     if probability > 0.5:
-        label = "👨 Male Eye"
+        label = "👨 Female Eye"
         confidence = probability
     else:
-        label = "👩 Female Eye"
+        label = "👩 Male Eye"
         confidence = 1 - probability
 
     return label, confidence
@@ -135,13 +135,27 @@ if uploaded:
 
         st.progress(float(confidence))
 
-st.markdown("---")
+# ----------------------------
+# Developer Corner
+# ----------------------------
 
-st.markdown(
-"""
-<center>
-Made with ❤️ using TensorFlow & Streamlit
-</center>
-""",
+st.markdown("---")
+st.subheader("👨‍💻 Developer Corner")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.markdown("### 👤 Developer")
+    st.write("**Vivek Srivastava**")
+    st.write("B.Tech IT ")
+    st.write("Machine Learning & Data Science Enthusiast")
+
+with col2:
+    st.markdown("### 🔗 Connect with Me")
+    st.markdown("[💼 LinkedIn](https://www.linkedin.com/in/vivek-srivastava-0a878a329)")
+    st.markdown("[💻 GitHub](https://github.com/viveksrivastava045-cyber/AIML_projects/edit/main/PROJECT_03_CANADA_per_capita_income)")
+
+st.markdown("---")
+st.caption("Made with ❤️ using Python, Scikit-Learn & Streamlit")
 unsafe_allow_html=True
 )
