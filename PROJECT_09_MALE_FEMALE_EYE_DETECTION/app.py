@@ -12,36 +12,84 @@ st.set_page_config(
     layout="wide"
 )
 
-# ------------------------------
-# Custom CSS
-# ------------------------------
 st.markdown("""
 <style>
-.main{
-    background:#F8FAFC;
+
+#MainMenu {visibility:hidden;}
+footer {visibility:hidden;}
+header {visibility:hidden;}
+
+.block-container{
+    padding-top:2rem;
+    padding-bottom:2rem;
 }
-.title{
+
+.stApp{
+    background:linear-gradient(135deg,#EEF5FF,#FFFFFF);
+}
+
+.hero{
+    padding:25px;
+    border-radius:20px;
+    background:linear-gradient(90deg,#4F46E5,#2563EB);
+    color:white;
     text-align:center;
+    box-shadow:0px 8px 25px rgba(0,0,0,.15);
+}
+
+.hero h1{
     font-size:42px;
-    font-weight:bold;
-    color:#1E3A8A;
+    margin-bottom:5px;
 }
-.subtitle{
-    text-align:center;
+
+.hero p{
     font-size:18px;
-    color:gray;
+    opacity:.9;
 }
-.result{
-    font-size:30px;
-    font-weight:bold;
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0px 8px 20px rgba(0,0,0,.08);
+    margin-top:20px;
+}
+
+.result-card{
+    background:#F8FAFC;
+    border-left:8px solid #2563EB;
+    padding:25px;
+    border-radius:15px;
     text-align:center;
 }
+
+.result{
+    font-size:34px;
+    font-weight:700;
+    color:#2563EB;
+}
+
+.footer-card{
+    background:white;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0px 6px 18px rgba(0,0,0,.08);
+}
+
+a{
+    text-decoration:none;
+    font-weight:bold;
+}
+
 </style>
 """, unsafe_allow_html=True)
-
-st.markdown("<div class='title'>👁️ Male & Female Eye Detection</div>", unsafe_allow_html=True)
-st.markdown("<div class='subtitle'>Deep Learning | TensorFlow | Streamlit</div>", unsafe_allow_html=True)
-
+st.markdown("""
+<div class='hero'>
+<h1>👁️ Male & Female Eye Detection</h1>
+<p>Deep Learning • TensorFlow • Streamlit</p>
+</div>
+""", unsafe_allow_html=True)
+  
 # ------------------------------
 # Load Model
 # ------------------------------
@@ -72,10 +120,10 @@ def predict(img):
     probability = float(prediction[0][0])
 
     if probability > 0.5:
-        label = "👨 Female Eye"
+        label = "👩 Female Eye"
         confidence = probability
     else:
-        label = "👩 Male Eye"
+        label = "👨 Male Eye"
         confidence = 1 - probability
 
     return label, confidence
@@ -101,10 +149,16 @@ st.sidebar.info(
 # ------------------------------
 # Upload Image
 # ------------------------------
+st.markdown("<div class='card'>", unsafe_allow_html=True)
+
+st.subheader("📤 Upload Eye Image")
+
 uploaded = st.file_uploader(
-    "Upload an Eye Image",
+    "Choose an image",
     type=["jpg","jpeg","png"]
 )
+
+st.markdown("</div>", unsafe_allow_html=True)
 
 if uploaded:
 
