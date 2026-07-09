@@ -14,22 +14,6 @@ st.set_page_config(
     page_icon="🌸",
     layout="wide"
 )
-# ---------------------------------------------
-# ABOUT
-# ---------------------------------------------
-st.write("")
-
-st.info("""
-### About Project
-
-This application predicts the Iris flower species using the K-Nearest Neighbors (KNN) Machine Learning algorithm.
-
-**Dataset:** Iris Dataset
-
-**Algorithm:** KNN Classifier
-
-**Libraries:** Scikit-Learn • Pandas • Streamlit
-""")
 
 # ---------------------------------------------
 # CUSTOM CSS
@@ -103,6 +87,23 @@ df = pd.DataFrame(
 )
 
 df["Species"] = [iris.target_names[i] for i in iris.target]
+# ---------------------------------------------
+# ABOUT
+# ---------------------------------------------
+st.write("")
+
+st.info("""
+### About Project
+
+This application predicts the Iris flower species using the K-Nearest Neighbors (KNN) Machine Learning algorithm.
+
+**Dataset:** Iris Dataset
+
+**Algorithm:** KNN Classifier
+
+**Libraries:** Scikit-Learn • Pandas • Streamlit
+""")
+
 
 # ---------------------------------------------
 # TRAIN MODEL
