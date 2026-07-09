@@ -25,14 +25,14 @@ header {visibility:hidden;}
 }
 
 .stApp{
-    background: purple;
+    background: meganta;
 }
 
 .hero{
     padding:25px;
     border-radius:20px;
     background:linear-gradient(90deg,#4F46E5,#2563EB);
-    color:white;
+    color:yellow;
     text-align:center;
     box-shadow:0px 8px 25px rgba(0,0,0,.15);
 }
