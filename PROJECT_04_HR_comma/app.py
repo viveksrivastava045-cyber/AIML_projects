@@ -1,56 +1,74 @@
 import streamlit as st
 import pandas as pd
-from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
 
-# -------------------------------------------------------
+# --------------------------------------------------
 # Page Config
-# -------------------------------------------------------
+# --------------------------------------------------
 
 st.set_page_config(
-    page_title="Employee Retention Predictor",
+    page_title="Employee Retention Prediction",
     page_icon="👨‍💼",
     layout="wide"
 )
 
 st.title("👨‍💼 Employee Retention Prediction")
-st.markdown("Predict whether an employee is likely to leave the company.")
+st.write("Predict whether an employee will leave the company.")
 
-# -------------------------------------------------------
+# --------------------------------------------------
 # Load Dataset
-# -------------------------------------------------------
+# --------------------------------------------------
 
 @st.cache_data
 def load_data():
-    return pd.read_csv("PROJECT_04_HR_comma/HR_comma_sep.csv")
+    return pd.read_csv("HR_comma_sep.csv")
 
 df = load_data()
 
-# -------------------------------------------------------
-# Data Preprocessing
-# -------------------------------------------------------
+# --------------------------------------------------
+# Preprocessing (Exactly Same as Notebook)
+# --------------------------------------------------
 
-subdf = df[['satisfaction_level',
-            'average_montly_hours',
-            'promotion_last_5years',
-            'salary']]
+subdf = df[
+    [
+        "satisfaction_level",
+        "average_montly_hours",
+        "promotion_last_5years",
+        "salary",
+    ]
+]
 
-salary_dummies = pd.get_dummies(subdf.salary, prefix="salary")
+salary_dummies = pd.get_dummies(
+    subdf["salary"],
+    prefix="salary"
+)
 
-X = pd.concat([subdf, salary_dummies], axis=1)
+df_with_dummies = pd.concat(
+    [subdf, salary_dummies],
+    axis=1
+)
 
-X.drop('salary', axis=1, inplace=True)
+df_with_dummies.drop(
+    "salary",
+    axis=1,
+    inplace=True
+)
 
-y = df.left
+X = df_with_dummies
+y = df["left"]
 
-# -------------------------------------------------------
+# Ensure bool dummy columns become integers
+X = X.astype(int, errors="ignore")
+
+# --------------------------------------------------
 # Train Model
-# -------------------------------------------------------
+# --------------------------------------------------
 
 X_train, X_test, y_train, y_test = train_test_split(
     X,
     y,
-    test_size=0.3,
+    train_size=0.30,
     random_state=42
 )
 
@@ -60,24 +78,20 @@ model.fit(X_train, y_train)
 
 accuracy = model.score(X_test, y_test)
 
-# -------------------------------------------------------
+# --------------------------------------------------
 # Sidebar
-# -------------------------------------------------------
+# --------------------------------------------------
 
-st.sidebar.header("Model Information")
+st.sidebar.header("Model")
 
 st.sidebar.metric(
     "Accuracy",
     f"{accuracy*100:.2f}%"
 )
 
-st.sidebar.write("Developed using Logistic Regression")
-
-# -------------------------------------------------------
-# User Inputs
-# -------------------------------------------------------
-
-st.header("Employee Details")
+# --------------------------------------------------
+# Input Form
+# --------------------------------------------------
 
 col1, col2 = st.columns(2)
 
@@ -85,9 +99,9 @@ with col1:
 
     satisfaction = st.slider(
         "Satisfaction Level",
-        0.0,
-        1.0,
-        0.5,
+        0.00,
+        1.00,
+        0.50,
         0.01
     )
 
@@ -106,27 +120,37 @@ with col2:
     )
 
     salary = st.selectbox(
-        "Salary Level",
+        "Salary",
         ["low", "medium", "high"]
     )
 
+# --------------------------------------------------
+# Salary Encoding (IMPORTANT)
+# --------------------------------------------------
+
+salary_high = 1 if salary == "high" else 0
 salary_low = 1 if salary == "low" else 0
 salary_medium = 1 if salary == "medium" else 0
 
-input_data = pd.DataFrame(
-    [[
-        satisfaction,
-        monthly_hours,
-        promotion,
-        salary_low,
-        salary_medium
-    ]],
-    columns=X.columns
-)
+# --------------------------------------------------
+# Prediction Data
+# --------------------------------------------------
 
-# -------------------------------------------------------
+input_data = pd.DataFrame({
+    "satisfaction_level": [satisfaction],
+    "average_montly_hours": [monthly_hours],
+    "promotion_last_5years": [promotion],
+    "salary_high": [salary_high],
+    "salary_low": [salary_low],
+    "salary_medium": [salary_medium],
+})
+
+# Match training columns exactly
+input_data = input_data.reindex(columns=X.columns)
+
+# --------------------------------------------------
 # Prediction
-# -------------------------------------------------------
+# --------------------------------------------------
 
 if st.button("Predict"):
 
@@ -136,31 +160,28 @@ if st.button("Predict"):
 
     if prediction == 1:
 
-        st.error("⚠️ Employee is likely to leave the company.")
+        st.error("⚠️ Employee is likely to leave.")
 
     else:
 
-        st.success("✅ Employee is likely to stay with the company.")
+        st.success("✅ Employee is likely to stay.")
 
     st.subheader("Prediction Probability")
 
-    st.progress(float(max(probability)))
+    result = pd.DataFrame({
+        "Outcome": ["Stay", "Leave"],
+        "Probability": probability
+    })
 
-    st.write(
-        pd.DataFrame({
-            "Outcome": ["Stay", "Leave"],
-            "Probability": probability
-        })
-    )
+    st.dataframe(result, use_container_width=True)
 
-# -------------------------------------------------------
-# Dataset Preview
-# -------------------------------------------------------
+# --------------------------------------------------
+# Dataset
+# --------------------------------------------------
 
-with st.expander("View Dataset"):
+with st.expander("Dataset Preview"):
 
-    st.dataframe(df.head())
-
+    st.dataframe(df.head(), use_container_width=True)
 # ----------------------------
 # Developer Corner
 # ----------------------------
