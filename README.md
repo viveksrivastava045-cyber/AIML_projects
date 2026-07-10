@@ -4,7 +4,7 @@ Click here -> https://aimlprojects-kuhwr4vikm84sagpzt3jsi.streamlit.app/
 
 PROJECT_04 : Employee Retention Prediction : 
 
-Click here -> https://aimlprojects-aztmiosna8shppcuu5bw3w.streamlit.app/
+Click here -> https://aimlprojects-pxecy9zayh9tcb8qovqkwx.streamlit.app/
 
 PROJECT_05 :  Male / Female Gender Classification App : 
 
