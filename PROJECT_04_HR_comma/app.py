@@ -1,187 +1,131 @@
 import streamlit as st
 import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
+import joblib
 
-# --------------------------------------------------
-# Page Config
-# --------------------------------------------------
-
+# -------------------------------
+# Page Configuration
+# -------------------------------
 st.set_page_config(
-    page_title="Employee Retention Prediction",
+    page_title="Employee Retention Predictor",
     page_icon="👨‍💼",
     layout="wide"
 )
 
+# -------------------------------
+# Load Model
+# -------------------------------
+@st.cache_resource
+def load_model():
+    return joblib.load("PROJECT_04_HR_comma/model.pkl")
+
+model = load_model()
+
+# -------------------------------
+# Title
+# -------------------------------
 st.title("👨‍💼 Employee Retention Prediction")
-st.write("Predict whether an employee will leave the company.")
-
-# --------------------------------------------------
-# Load Dataset
-# --------------------------------------------------
-
-@st.cache_data
-def load_data():
-    return pd.read_csv("PROJECT_04_HR_comma/HR_comma_sep.csv")
-
-df = load_data()
-
-# --------------------------------------------------
-# Preprocessing (Exactly Same as Notebook)
-# --------------------------------------------------
-
-subdf = df[
-    [
-        "satisfaction_level",
-        "average_montly_hours",
-        "promotion_last_5years",
-        "salary",
-    ]
-]
-
-salary_dummies = pd.get_dummies(
-    subdf["salary"],
-    prefix="salary"
+st.markdown(
+    "Predict whether an employee is likely to **leave the company** using a Logistic Regression model."
 )
 
-df_with_dummies = pd.concat(
-    [subdf, salary_dummies],
-    axis=1
-)
+st.divider()
 
-df_with_dummies.drop(
-    "salary",
-    axis=1,
-    inplace=True
-)
-
-X = df_with_dummies
-y = df["left"]
-
-# Ensure bool dummy columns become integers
-X = X.astype(int, errors="ignore")
-
-# --------------------------------------------------
-# Train Model
-# --------------------------------------------------
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X,
-    y,
-    train_size=0.30,
-    random_state=42
-)
-
-model = LogisticRegression(max_iter=1000)
-
-model.fit(X_train, y_train)
-
-accuracy = model.score(X_test, y_test)
-
-# --------------------------------------------------
-# Sidebar
-# --------------------------------------------------
-
-st.sidebar.header("Model")
-
-st.sidebar.metric(
-    "Accuracy",
-    f"{accuracy*100:.2f}%"
-)
-
-# --------------------------------------------------
-# Input Form
-# --------------------------------------------------
-
-col1, col2 = st.columns(2)
+# -------------------------------
+# Layout
+# -------------------------------
+col1, col2 = st.columns([1, 1])
 
 with col1:
 
     satisfaction = st.slider(
         "Satisfaction Level",
-        0.00,
-        1.00,
-        0.50,
-        0.01
+        min_value=0.00,
+        max_value=1.00,
+        value=0.50,
+        step=0.01,
     )
 
-    monthly_hours = st.slider(
+    hours = st.slider(
         "Average Monthly Hours",
-        80,
-        320,
-        200
+        min_value=80,
+        max_value=320,
+        value=200,
     )
 
 with col2:
 
     promotion = st.selectbox(
         "Promotion in Last 5 Years",
-        [0, 1]
+        ["No", "Yes"]
     )
 
     salary = st.selectbox(
-        "Salary",
-        ["low", "medium", "high"]
+        "Salary Level",
+        ["Low", "Medium", "High"]
     )
 
-# --------------------------------------------------
-# Salary Encoding (IMPORTANT)
-# --------------------------------------------------
+st.divider()
 
-salary_high = 1 if salary == "high" else 0
-salary_low = 1 if salary == "low" else 0
-salary_medium = 1 if salary == "medium" else 0
+# -------------------------------
+# Feature Engineering
+# -------------------------------
 
-# --------------------------------------------------
-# Prediction Data
-# --------------------------------------------------
+promotion = 1 if promotion == "Yes" else 0
 
-input_data = pd.DataFrame({
-    "satisfaction_level": [satisfaction],
-    "average_montly_hours": [monthly_hours],
-    "promotion_last_5years": [promotion],
-    "salary_high": [salary_high],
-    "salary_low": [salary_low],
-    "salary_medium": [salary_medium],
-})
+salary_high = 1 if salary == "High" else 0
+salary_low = 1 if salary == "Low" else 0
+salary_medium = 1 if salary == "Medium" else 0
 
-# Match training columns exactly
-input_data = input_data.reindex(columns=X.columns)
+input_df = pd.DataFrame(
+    [[
+        satisfaction,
+        hours,
+        promotion,
+        salary_high,
+        salary_low,
+        salary_medium
+    ]],
+    columns=[
+        "satisfaction_level",
+        "average_montly_hours",
+        "promotion_last_5years",
+        "salary_high",
+        "salary_low",
+        "salary_medium",
+    ],
+)
 
-# --------------------------------------------------
+# -------------------------------
 # Prediction
-# --------------------------------------------------
+# -------------------------------
 
-if st.button("Predict"):
+if st.button("🔍 Predict", use_container_width=True):
 
-    prediction = model.predict(input_data)[0]
+    prediction = model.predict(input_df)[0]
+    probability = model.predict_proba(input_df)[0]
 
-    probability = model.predict_proba(input_data)[0]
+    st.divider()
 
-    if prediction > 0.75:
-
-        st.error("⚠️ Employee is likely to leave.")
-
+    if prediction == 1:
+        st.error("⚠️ This employee is likely to leave the company.")
+        confidence = probability[1] * 100
     else:
+        st.success("✅ This employee is likely to stay with the company.")
+        confidence = probability[0] * 100
 
-        st.success("✅ Employee is likely to stay.")
+    st.metric(
+        "Prediction Confidence",
+        f"{confidence:.2f}%"
+    )
 
-    st.subheader("Prediction Probability")
+    st.progress(confidence / 100)
 
-    result = pd.DataFrame({
-        "Outcome": ["Stay", "Leave"],
-        "Probability": probability
-    })
+    st.subheader("Input Summary")
 
-    st.dataframe(result, use_container_width=True)
+    st.table(input_df)
 
-# --------------------------------------------------
-# Dataset
-# --------------------------------------------------
 
-with st.expander("Dataset Preview"):
-
-    st.dataframe(df.head(), use_container_width=True)
+)
 # ----------------------------
 # Developer Corner
 # ----------------------------
