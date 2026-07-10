@@ -125,7 +125,7 @@ if st.button("🔍 Predict", use_container_width=True):
     st.table(input_df)
 
 
-
+)
 # ----------------------------
 # Developer Corner
 # ----------------------------
