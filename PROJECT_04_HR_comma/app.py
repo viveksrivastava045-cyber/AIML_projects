@@ -158,7 +158,7 @@ if st.button("Predict"):
 
     probability = model.predict_proba(input_data)[0]
 
-    if prediction > 0.5:
+    if prediction > 0.75:
 
         st.error("⚠️ Employee is likely to leave.")
 
