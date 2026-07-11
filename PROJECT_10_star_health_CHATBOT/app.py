@@ -1,3 +1,7 @@
+import langchain
+import streamlit as st
+
+st.write(langchain.__version__)
 import os
 import streamlit as st
 from dotenv import load_dotenv
