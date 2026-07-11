@@ -22,7 +22,7 @@ st.title("🎬 KGF 2 Review Sentiment Analyzer")
 
 # --- NEW: Added the image here ---
 # use_column_width=True ensures the image scales nicely to fit the app's width
-st.image("ChatGPT Image Jul 11, 2026, 03_46_39 PM_2.png", use_column_width=True)
+st.image("PROJECT_11_KGF_REVIEW/ChatGPT Image Jul 11, 2026, 03_46_39 PM.png", use_column_width=True)
 # ---------------------------------
 
 st.markdown("Analyze the sentiment of audience reviews using LLMs. Type a review below to see if it's **POSITIVE** or **NEGATIVE**.")
