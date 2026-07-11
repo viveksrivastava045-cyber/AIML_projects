@@ -47,7 +47,7 @@ os.environ["GOOGLE_API_KEY"] = api_key
 @st.cache_resource
 def load_chain():
 
-    loader = UnstructuredHTMLLoader("starhealth.html")
+    loader = UnstructuredHTMLLoader("PROJECT_10_star_health_CHATBOT/starhealth.html")
     documents = loader.load()
 
     splitter = RecursiveCharacterTextSplitter(
