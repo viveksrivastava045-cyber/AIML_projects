@@ -12,14 +12,19 @@ st.set_page_config(
 # @st.cache_resource ensures the model is only downloaded/loaded once into memory
 @st.cache_resource
 def load_classifier():
-    # Initializes the default sentiment-analysis pipeline (distilbert-base-uncased-finetuned-sst-2-english)
-    # If your notebook used a specific model path, replace "sentiment-analysis" with: pipeline("sentiment-analysis", model="your-model-name")
+    # Initializes the default sentiment-analysis pipeline
     return pipeline("sentiment-analysis")
 
 classifier = load_classifier()
 
-# 3. App UI Header
+# 3. App UI Header & Image
 st.title("🎬 KGF 2 Review Sentiment Analyzer")
+
+# --- NEW: Added the image here ---
+# use_column_width=True ensures the image scales nicely to fit the app's width
+st.image("ChatGPT Image Jul 11, 2026, 03_46_39 PM_2.png", use_column_width=True)
+# ---------------------------------
+
 st.markdown("Analyze the sentiment of audience reviews using LLMs. Type a review below to see if it's **POSITIVE** or **NEGATIVE**.")
 
 # 4. User Input
