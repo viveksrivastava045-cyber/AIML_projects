@@ -16,7 +16,7 @@ from langchain.chains import RetrievalQA
 # ----------------------------
 load_dotenv()
 
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+GOOGLE_API_KEY = os.getenv("PROJECT_10_star_health_CHATBOT/GOOGLE_API_KEY.env")
 
 # ----------------------------
 # Page Config
