@@ -1,0 +1,12 @@
+streamlit
+langchain
+langchain-community
+langchain-core
+langchain-chroma
+langchain-google-genai
+chromadb
+unstructured
+beautifulsoup4
+lxml
+tiktoken
+pydantic
