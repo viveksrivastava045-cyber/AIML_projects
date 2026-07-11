@@ -1,137 +1,49 @@
 import streamlit as st
-import pandas as pd
 from transformers import pipeline
 
+# 1. Page Configuration
 st.set_page_config(
-    page_title="KGF 2 Review Analysis",
+    page_title="KGF 2 Sentiment Analyzer",
     page_icon="🎬",
-    layout="wide"
+    layout="centered"
 )
 
-# --------------------------
-# Cache Models
-# --------------------------
+# 2. Model Loading with Caching
+# @st.cache_resource ensures the model is only downloaded/loaded once into memory
 @st.cache_resource
-def load_models():
-    sentiment = pipeline(
-        "sentiment-analysis",
-        model="distilbert-base-uncased-finetuned-sst-2-english"
-    )
+def load_classifier():
+    # Initializes the default sentiment-analysis pipeline (distilbert-base-uncased-finetuned-sst-2-english)
+    # If your notebook used a specific model path, replace "sentiment-analysis" with: pipeline("sentiment-analysis", model="your-model-name")
+    return pipeline("sentiment-analysis")
 
-    summarizer = pipeline(
-        "summarization",
-        model="facebook/bart-large-cnn"
-    )
+classifier = load_classifier()
 
-    translator = pipeline(
-        "translation_en_to_es",
-        model="Helsinki-NLP/opus-mt-en-es"
-    )
+# 3. App UI Header
+st.title("🎬 KGF 2 Review Sentiment Analyzer")
+st.markdown("Analyze the sentiment of audience reviews using LLMs. Type a review below to see if it's **POSITIVE** or **NEGATIVE**.")
 
-    qa = pipeline(
-        "question-answering",
-        model="deepset/roberta-base-squad2"
-    )
+# 4. User Input
+default_review = "KGF 2 is an amazing movie with powerful action and excellent performance."
+sample_review = st.text_area("Enter Movie Review:", value=default_review, height=150)
 
-    return sentiment, summarizer, translator, qa
-
-
-sentiment_model, summarizer, translator, qa = load_models()
-
-# --------------------------
-# Sidebar
-# --------------------------
-st.sidebar.title("🎬 KGF 2 NLP Project")
-
-option = st.sidebar.radio(
-    "Select Task",
-    [
-        "Sentiment Analysis",
-        "Summarization",
-        "Translation",
-        "Question Answering"
-    ]
-)
-
-# --------------------------
-# Header
-# --------------------------
-st.title("🎬 Analyzing Netflix KGF 2 Reviews with LLMs")
-st.markdown(
-"""
-Analyze movie reviews using Hugging Face Large Language Models.
-
-- Sentiment Analysis
-- Review Summarization
-- English → Spanish Translation
-- Question Answering
-"""
-)
-
-review = st.text_area(
-    "Enter Movie Review",
-    height=180
-)
-
-# --------------------------
-# Sentiment
-# --------------------------
-if option == "Sentiment Analysis":
-
-    if st.button("Analyze Sentiment"):
-
-        if review:
-
-            result = sentiment_model(review)[0]
-
-            st.success(f"Prediction : {result['label']}")
-            st.info(f"Confidence : {result['score']:.2%}")
-
-# --------------------------
-# Summary
-# --------------------------
-elif option == "Summarization":
-
-    if st.button("Generate Summary"):
-
-        if review:
-
-            summary = summarizer(
-                review,
-                max_length=60,
-                min_length=20,
-                do_sample=False
-            )
-
-            st.write(summary[0]["summary_text"])
-
-# --------------------------
-# Translation
-# --------------------------
-elif option == "Translation":
-
-    if st.button("Translate"):
-
-        if review:
-
-            translated = translator(review)
-
-            st.success(translated[0]["translation_text"])
-
-# --------------------------
-# QA
-# --------------------------
-elif option == "Question Answering":
-
-    question = st.text_input("Ask a Question")
-
-    if st.button("Answer"):
-
-        if review and question:
-
-            answer = qa(
-                question=question,
-                context=review
-            )
-
-            st.success(answer["answer"])
+# 5. Prediction Logic
+if st.button("Analyze Sentiment", type="primary"):
+    if sample_review.strip() == "":
+        st.warning("Please enter a review to analyze.")
+    else:
+        with st.spinner("Analyzing sentiment..."):
+            # Generate sentiment prediction
+            sentiment_result = classifier(sample_review)
+            
+            # Extract label and confidence score
+            sentiment = sentiment_result[0]['label']
+            confidence = sentiment_result[0]['score']
+            
+            # 6. Display Results
+            st.markdown("### Result")
+            if sentiment == "POSITIVE":
+                st.success(f"**Sentiment:** {sentiment} 📈")
+                st.info(f"**Confidence Score:** {confidence:.4f}")
+            else:
+                st.error(f"**Sentiment:** {sentiment} 📉")
+                st.info(f"**Confidence Score:** {confidence:.4f}")
