@@ -1,5 +1,11 @@
 import os
 import streamlit as st
+import streamlit as st
+import langchain
+import langchain_core
+
+st.write("LangChain:", langchain.__version__)
+st.write("LangChain Core:", langchain_core.__version__)
 
 from langchain_community.document_loaders import UnstructuredHTMLLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
