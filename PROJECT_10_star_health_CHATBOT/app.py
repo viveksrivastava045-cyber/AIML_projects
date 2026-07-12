@@ -12,7 +12,7 @@ from langchain_core.prompts import ChatPromptTemplate
 st.set_page_config(
     page_title="🏥 Health Insurance RAG Chatbot",
     page_icon="🏥",
-    layout="wide"
+    layout="center"
 )
 
 # ----------------------------
