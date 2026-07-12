@@ -62,7 +62,7 @@ uploaded_file = st.sidebar.file_uploader(
 )
 
 st.sidebar.markdown("---")
-st.sidebar.subheader("👨‍💻 Developer: VIVEK SRIVASTAVA")
+st.sidebar.subheader("👨‍💻 Developer: **VIVEK SRIVASTAVA**")
 
 st.sidebar.link_button(
     "🔗 LinkedIn Profile",
@@ -71,7 +71,7 @@ st.sidebar.link_button(
 
 st.sidebar.link_button(
     "💻 GitHub Profile",
-    "viveksrivastava045-cyber"
+    "https://github.com/viveksrivastava045-cyber/AIML_projects/blob/main/PROJECT_10_star_health_CHATBOT"
 )
 
 # ----------------------------
