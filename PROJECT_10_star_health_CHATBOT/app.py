@@ -132,7 +132,7 @@ def build_rag(html_path, api_key):
 # ----------------------------
 if uploaded_file and openai_api_key:
 
-    temp_path = "Types of Health Insurance Plans.html"
+    temp_path = "starhealth.html"
 
     with open(temp_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
