@@ -29,7 +29,7 @@ st.markdown("""
 .chat-box {
     padding: 15px;
     border-radius: 10px;
-    background-color: #ffffff;
+    background-color: #121212;
     margin-top: 10px;
 }
 </style>
