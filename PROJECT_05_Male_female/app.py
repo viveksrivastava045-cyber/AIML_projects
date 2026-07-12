@@ -29,9 +29,19 @@ IMG_SIZE = 64
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
-    # Display the uploaded image
+    # # Display the uploaded image
+    # image = Image.open(uploaded_file)
+    # st.image(image, caption="Uploaded Image", use_container_width=False)
+    from PIL import Image
+
     image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded Image", use_container_width=False)
+
+    st.image(
+        image,
+        caption="Uploaded Image",
+        width=250   # Change this value (e.g., 150, 200, 300)
+    )
+    
     
     # Process button
     if st.button("Predict Gender"):
