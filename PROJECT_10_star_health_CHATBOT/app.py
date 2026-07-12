@@ -1,131 +1,198 @@
+import streamlit as st
 import os
-import streamlit as st
-import streamlit as st
-import langchain
-import langchain_core
-
-st.write("LangChain:", langchain.__version__)
-st.write("LangChain Core:", langchain_core.__version__)
-
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_community.document_loaders import UnstructuredHTMLLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
-
-from langchain_google_genai import (
-    GoogleGenerativeAIEmbeddings,
-    ChatGoogleGenerativeAI,
-)
-
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain.chains.combine_documents import create_stuff_documents_chain
-
 from langchain_core.prompts import ChatPromptTemplate
 
-# -----------------------------
-# Streamlit Config
-# -----------------------------
+# ----------------------------
+# Page Configuration
+# ----------------------------
 st.set_page_config(
-    page_title="Star Health Insurance Chatbot",
+    page_title="🏥 Health Insurance RAG Chatbot",
     page_icon="🏥",
-    layout="wide",
+    layout="wide"
 )
 
-st.title("🏥 Star Health Insurance RAG Chatbot")
-st.write("Ask anything about Star Health Insurance.")
+# ----------------------------
+# Custom CSS
+# ----------------------------
+st.markdown("""
+<style>
+.main {
+    background-color: #f8fafc;
+}
+.stTextInput > div > div > input {
+    border-radius: 10px;
+}
+.chat-box {
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    margin-top: 10px;
+}
+</style>
+""", unsafe_allow_html=True)
 
-# -----------------------------
-# API KEY
-# -----------------------------
-api_key = st.sidebar.text_input(
-    "Enter Google Gemini API Key",
+# ----------------------------
+# Header
+# ----------------------------
+st.title("🏥 Health Insurance RAG Chatbot")
+st.markdown(
+    """
+    Ask questions about health insurance policies and get intelligent answers using
+    **RAG (Retrieval Augmented Generation)** powered by LangChain + OpenAI.
+    """
+)
+
+# ----------------------------
+# Sidebar
+# ----------------------------
+st.sidebar.header("⚙️ Configuration")
+
+openai_api_key = st.sidebar.text_input(
+    "Enter OpenAI API Key",
     type="password"
 )
 
-if not api_key:
-    st.info("Please enter your Gemini API Key.")
-    st.stop()
+uploaded_file = st.sidebar.file_uploader(
+    "Upload Health Insurance HTML File",
+    type=["html", "htm"]
+)
 
-os.environ["GOOGLE_API_KEY"] = api_key
+st.sidebar.markdown("---")
+st.sidebar.subheader("👨‍💻 Developer: Richeek Pandey")
 
-# -----------------------------
-# Load Documents
-# -----------------------------
+st.sidebar.link_button(
+    "🔗 LinkedIn Profile",
+    "https://www.linkedin.com/in/richeek-pandey-9954783a9/"
+)
+
+st.sidebar.link_button(
+    "💻 GitHub Profile",
+    "https://github.com/richeekpandey07"
+)
+
+# ----------------------------
+# Build RAG System
+# ----------------------------
 @st.cache_resource
-def load_chain():
+def build_rag(html_path, api_key):
 
-    loader = UnstructuredHTMLLoader("PROJECT_10_star_health_CHATBOT/starhealth.html")
-    documents = loader.load()
+    os.environ["OPENAI_API_KEY"] = api_key
 
-    splitter = RecursiveCharacterTextSplitter(
+    loader = UnstructuredHTMLLoader(file_path=html_path)
+    docs = loader.load()
+
+    text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=1000,
         chunk_overlap=200
     )
 
-    docs = splitter.split_documents(documents)
+    splits = text_splitter.split_documents(docs)
 
-    embeddings = GoogleGenerativeAIEmbeddings(
-        model="models/embedding-001"
+    embeddings = OpenAIEmbeddings(
+        model="text-embedding-3-small"
     )
 
     vectorstore = Chroma.from_documents(
-        docs,
-        embeddings
+        documents=splits,
+        embedding=embeddings
     )
 
-    retriever = vectorstore.as_retriever(
-        search_kwargs={"k":4}
-    )
+    retriever = vectorstore.as_retriever(search_kwargs={"k": 4})
 
-    llm = ChatGoogleGenerativeAI(
-        model="gemini-2.5-flash",
+    llm = ChatOpenAI(
+        model="gpt-4o-mini",
         temperature=0
     )
 
     prompt = ChatPromptTemplate.from_template(
         """
-You are an expert assistant for Star Health Insurance.
+        You are a Health Insurance Assistant.
 
-Answer ONLY using the provided context.
+        Use the following context to answer the question.
 
-If the answer is unavailable, say:
+        Context:
+        {context}
 
-"I couldn't find that information in the provided policy."
+        Question:
+        {question}
 
-Context:
-{context}
-
-Question:
-{input}
-"""
+        Answer:
+        """
     )
 
-    document_chain = create_stuff_documents_chain(
-        llm,
-        prompt
-    )
+    return retriever, llm, prompt
 
-    retrieval_chain = create_retrieval_chain(
-        retriever,
-        document_chain
-    )
 
-    return retrieval_chain
+# ----------------------------
+# File Processing
+# ----------------------------
+if uploaded_file and openai_api_key:
 
-chain = load_chain()
+    temp_path = "Types of Health Insurance Plans.html"
 
-# -----------------------------
-# Chat
-# -----------------------------
-question = st.text_input("Ask a question")
+    with open(temp_path, "wb") as f:
+        f.write(uploaded_file.getbuffer())
 
-if question:
-
-    with st.spinner("Thinking..."):
-
-        response = chain.invoke(
-            {
-                "input": question
-            }
+    with st.spinner("🔄 Building Knowledge Base..."):
+        retriever, llm, prompt = build_rag(
+            temp_path,
+            openai_api_key
         )
 
-    st.success(response["answer"])
+    st.success("✅ Knowledge Base Ready!")
+
+    query = st.text_input(
+        "💬 Ask a question about the insurance policy"
+    )
+
+    if query:
+
+        with st.spinner("🤖 Thinking..."):
+
+            docs = retriever.invoke(query)
+
+            context = "\n\n".join(
+                [doc.page_content for doc in docs]
+            )
+
+            formatted_prompt = prompt.format(
+                context=context,
+                question=query
+            )
+
+            response = llm.invoke(formatted_prompt)
+
+        st.markdown("### 📝 Answer")
+
+        st.markdown(
+            f"""
+            <div class="chat-box">
+            {response.content}
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        with st.expander("📚 Retrieved Context"):
+            for i, doc in enumerate(docs, start=1):
+                st.write(f"**Chunk {i}**")
+                st.write(doc.page_content[:1000])
+
+else:
+    st.info(
+        "👈 Upload an HTML insurance document and enter your OpenAI API key."
+    )
+
+# ----------------------------
+# Footer
+# ----------------------------
+st.markdown("---")
+st.markdown(
+    """
+    Developed with ❤️ using Streamlit, LangChain, ChromaDB & OpenAI
+    """
+)
