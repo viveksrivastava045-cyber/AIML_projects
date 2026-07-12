@@ -21,7 +21,7 @@ st.set_page_config(
 st.markdown("""
 <style>
 .main {
-    background-color: #0A192F;
+    background-color: #121212;
 }
 .stTextInput > div > div > input {
     border-radius: 10px;
