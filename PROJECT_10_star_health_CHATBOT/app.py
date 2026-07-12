@@ -233,10 +233,10 @@ with st.sidebar:
 #     "https://github.com/richeekpandey07"
 # )
 
-# ----------------------------
-# Build RAG System
-# ----------------------------
-@st.cache_resource
+# # ----------------------------
+#  Build RAG System
+# # ----------------------------
+ @st.cache_resource
 def build_rag(html_path, api_key):
 
     os.environ["OPENAI_API_KEY"] = api_key
