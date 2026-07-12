@@ -10,7 +10,8 @@ from langchain_core.prompts import ChatPromptTemplate
 # Page Configuration
 # ----------------------------
 st.set_page_config(
-    page_title="🏥 Health Insurance RAG Chatbot",
+    st.title("🏥 Health Insurance RAG Chatbot")
+    # page_title="🏥 Health Insurance RAG Chatbot",
     page_icon="🏥",
     layout="wide"
 )
@@ -20,18 +21,139 @@ st.set_page_config(
 # ----------------------------
 st.markdown("""
 <style>
-.main {
-    background-color: #f8fafc;
+
+#MainMenu {visibility:hidden;}
+footer {visibility:hidden;}
+header {visibility:hidden;}
+
+.stApp{
+    background: linear-gradient(135deg,#edf4ff,#f8fbff,#ffffff);
 }
-.stTextInput > div > div > input {
-    border-radius: 10px;
+
+/* Header */
+
+.main-title{
+    text-align:center;
+    padding:25px;
+    border-radius:20px;
+    background:linear-gradient(90deg,#0072ff,#00c6ff);
+    color:white;
+    box-shadow:0px 10px 30px rgba(0,0,0,.15);
+    margin-bottom:20px;
 }
-.chat-box {
-    padding: 15px;
-    border-radius: 10px;
-    background-color: #ffffff;
-    margin-top: 10px;
+
+.main-title h1{
+    font-size:42px;
+    font-weight:800;
+    margin:0;
 }
+
+.main-title p{
+    font-size:18px;
+    margin-top:8px;
+}
+
+/* Sidebar */
+
+section[data-testid="stSidebar"]{
+    background:#0f172a;
+}
+
+section[data-testid="stSidebar"] *{
+    color:white;
+}
+
+/* Inputs */
+
+.stTextInput input{
+    border-radius:12px;
+    border:2px solid #dbeafe;
+    padding:12px;
+    font-size:17px;
+}
+
+.stTextInput input:focus{
+    border:2px solid #2563eb;
+}
+
+/* Buttons */
+
+.stButton button{
+
+    width:100%;
+    border:none;
+    border-radius:12px;
+
+    background:linear-gradient(90deg,#2563eb,#06b6d4);
+
+    color:white;
+
+    font-weight:700;
+
+    padding:12px;
+
+    transition:.3s;
+
+}
+
+.stButton button:hover{
+
+transform:scale(1.02);
+
+box-shadow:0px 10px 20px rgba(0,0,0,.2);
+
+}
+
+/* Answer Card */
+
+.answer-box{
+
+padding:20px;
+
+background:white;
+
+border-radius:18px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+border-left:8px solid #2563eb;
+
+font-size:18px;
+
+line-height:1.8;
+
+}
+
+/* Info Card */
+
+.info-card{
+
+background:white;
+
+padding:20px;
+
+border-radius:18px;
+
+box-shadow:0px 6px 18px rgba(0,0,0,.08);
+
+margin-top:15px;
+
+}
+
+/* Footer */
+
+.footer{
+
+text-align:center;
+
+padding:20px;
+
+font-size:15px;
+
+color:#64748b;
+
+}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -49,30 +171,68 @@ st.markdown(
 # ----------------------------
 # Sidebar
 # ----------------------------
-st.sidebar.header("⚙️ Configuration")
+with st.sidebar:
 
-openai_api_key = st.sidebar.text_input(
-    "Enter OpenAI API Key",
-    type="password"
-)
+    st.image(
+        "https://cdn-icons-png.flaticon.com/512/2966/2966485.png",
+        width=80
+    )
 
-uploaded_file = st.sidebar.file_uploader(
-    "Upload Health Insurance HTML File",
-    type=["html", "htm"]
-)
+    st.title("Configuration")
 
-st.sidebar.markdown("---")
-st.sidebar.subheader("👨‍💻 Developer: Richeek Pandey")
+    openai_api_key = st.text_input(
+        "OpenAI API Key",
+        type="password"
+    )
 
-st.sidebar.link_button(
-    "🔗 LinkedIn Profile",
-    "https://www.linkedin.com/in/richeek-pandey-9954783a9/"
-)
+    uploaded_file = st.file_uploader(
+        "Upload HTML Policy",
+        type=["html","htm"]
+    )
 
-st.sidebar.link_button(
-    "💻 GitHub Profile",
-    "https://github.com/richeekpandey07"
-)
+    st.divider()
+
+    st.markdown("### 👨‍💻 Developer")
+
+    st.write("**VIVEK KUMAR SRIVASTAVA**")
+
+    col1,col2=st.columns(2)
+
+    with col1:
+        st.link_button(
+            "GitHub",
+            "https://github.com/viveksrivastva045-cyber"
+        )
+
+    with col2:
+        st.link_button(
+            "LinkedIn",
+            "https://www.linkedin.com/in/vivek-srivastava-0a878a329/"
+        )
+# st.sidebar.header("⚙️ Configuration")
+
+# openai_api_key = st.sidebar.text_input(
+#     "Enter OpenAI API Key",
+#     type="password"
+# )
+
+# uploaded_file = st.sidebar.file_uploader(
+#     "Upload Health Insurance HTML File",
+#     type=["html", "htm"]
+# )
+
+# st.sidebar.markdown("---")
+# st.sidebar.subheader("👨‍💻 Developer: Richeek Pandey")
+
+# st.sidebar.link_button(
+#     "🔗 LinkedIn Profile",
+#     "https://www.linkedin.com/in/richeek-pandey-9954783a9/"
+# )
+
+# st.sidebar.link_button(
+#     "💻 GitHub Profile",
+#     "https://github.com/richeekpandey07"
+# )
 
 # ----------------------------
 # Build RAG System
