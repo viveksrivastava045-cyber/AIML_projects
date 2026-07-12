@@ -26,7 +26,7 @@ footer {visibility:hidden;}
 header {visibility:hidden;}
 
 .stApp{
-    background: linear-gradient(135deg,#edf4ff,#f8fbff,#ffffff);
+    background: linear-gradient(135deg,#edf4ff,#f8fbff,);
 }
 
 /* Header */
