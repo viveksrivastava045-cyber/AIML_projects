@@ -10,7 +10,7 @@ from langchain_core.prompts import ChatPromptTemplate
 # Page Configuration
 # ----------------------------
 st.set_page_config(
-    st.title("🏥 Health Insurance RAG Chatbot")
+    st.title("🏥 Health Insurance RAG Chatbot"),
     # page_title="🏥 Health Insurance RAG Chatbot",
     page_icon="🏥",
     layout="wide"
