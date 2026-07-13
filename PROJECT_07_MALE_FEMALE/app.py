@@ -69,3 +69,23 @@ if uploaded_file is not None:
         st.write("Probability Breakdown:")
         st.progress(float(prediction))
         st.caption("0.0 (Female) 👤 ---------------------------------------------------- 👤 1.0 (Male)")
+
+
+st.markdown("---")
+st.subheader("👨‍💻 Developer Corner")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.markdown("### 👤 Developer")
+    st.write("**Vivek Srivastava**")
+    st.write("B.Tech IT ")
+    st.write("Machine Learning & Data Science Enthusiast")
+
+with col2:
+    st.markdown("### 🔗 Connect with Me")
+    st.markdown("[💼 LinkedIn](https://www.linkedin.com/in/vivek-srivastava-0a878a329)")
+    st.markdown("[💻 GitHub](https://github.com/viveksrivastava045-cyber/AIML_projects/edit/main/PROJECT_03_CANADA_per_capita_income)")
+
+st.markdown("---")
+st.caption("Made with ❤️ using Python, Scikit-Learn & Streamlit")
