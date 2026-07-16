@@ -417,7 +417,7 @@ if uploaded is not None:
     with col1:
         st.markdown('<div class="card">', unsafe_allow_html=True)
         st.markdown("#### 🖼️ Uploaded Image")
-        st.image(image, use_container_width=64)
+        st.image(image, use_container_width=245)
         st.caption(f"File: {uploaded.name} • {image.size[0]}×{image.size[1]} px")
         st.markdown('</div>', unsafe_allow_html=True)
 
