@@ -42,7 +42,7 @@ st.markdown("""
     /* Hide default streamlit branding clutter */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
-    header[data-testid="stHeader"] {background: rgba(0,0,0,0);}
+    header[data-testid="stHeader"] {background: rgba(0,9,0,0);}
 
     /* Sidebar */
     section[data-testid="stSidebar"] {
