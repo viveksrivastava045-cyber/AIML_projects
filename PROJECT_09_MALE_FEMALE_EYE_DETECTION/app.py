@@ -18,47 +18,118 @@ st.set_page_config(
 # Custom CSS
 # ------------------------------
 st.markdown("""
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-    /* Overall page */
-    .main {
-        background: linear-gradient(180deg, #F8FAFC 0%, #EEF2FF 100%);
+    :root {
+        --ink: #1E1B4B;
+        --muted: #6B7280;
+        --primary: #6D28D9;
+        --primary-dark: #4C1D95;
+        --accent: #F472B6;
+        --bg-a: #F5F3FF;
+        --bg-b: #FDF2F8;
+    }
+
+    html, body, [class*="css"] {
+        font-family: 'Inter', sans-serif;
+    }
+
+    /* Overall page background */
+    .stApp {
+        background: linear-gradient(160deg, var(--bg-a) 0%, #FFFFFF 45%, var(--bg-b) 100%);
     }
 
     /* Hide default streamlit branding clutter */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
+    header[data-testid="stHeader"] {background: rgba(0,0,0,0);}
+
+    /* Sidebar */
+    section[data-testid="stSidebar"] {
+        background: linear-gradient(180deg, var(--primary-dark), #2E1065);
+    }
+    section[data-testid="stSidebar"] * {
+        color: #EDE9FE !important;
+    }
+    section[data-testid="stSidebar"] hr {
+        border-color: rgba(255,255,255,0.15);
+    }
 
     /* Hero header */
     .hero {
         text-align: center;
-        padding: 1.6rem 1rem 1rem 1rem;
+        padding: 2rem 1rem 1.2rem 1rem;
     }
     .hero-title {
-        font-size: 44px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 48px;
         font-weight: 800;
-        color: #1E3A8A;
-        margin-bottom: 0.2rem;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0.3rem;
     }
     .hero-subtitle {
         font-size: 17px;
-        color: #64748B;
+        color: var(--muted);
         font-weight: 500;
+    }
+
+    /* Badge */
+    .badge {
+        display: inline-block;
+        background: white;
+        color: var(--primary);
+        padding: 5px 14px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        margin: 6px 4px 0 0;
+        box-shadow: 0 2px 8px rgba(109, 40, 217, 0.15);
+        border: 1px solid #E9D5FF;
     }
 
     /* Card container */
     .card {
-        background: white;
-        border-radius: 16px;
-        padding: 1.4rem;
-        box-shadow: 0 4px 18px rgba(30, 58, 138, 0.08);
-        border: 1px solid #E5E9F5;
+        background: rgba(255,255,255,0.85);
+        backdrop-filter: blur(6px);
+        border-radius: 20px;
+        padding: 1.5rem;
+        box-shadow: 0 8px 30px rgba(109, 40, 217, 0.10);
+        border: 1px solid #EDE9FE;
+    }
+    .card h4 {
+        font-family: 'Poppins', sans-serif;
+        color: var(--ink);
+    }
+
+    /* Section headers written with st.markdown("### ...") */
+    h3 {
+        font-family: 'Poppins', sans-serif !important;
+        color: var(--ink) !important;
+    }
+
+    /* File uploader restyle */
+    div[data-testid="stFileUploaderDropzone"] {
+        background: linear-gradient(135deg, #F5F3FF, #FDF2F8);
+        border: 2px dashed #C4B5FD;
+        border-radius: 18px;
+    }
+    div[data-testid="stFileUploaderDropzone"]:hover {
+        border-color: var(--primary);
+    }
+    div[data-testid="stFileUploaderDropzone"] button {
+        background: var(--primary) !important;
+        color: white !important;
+        border-radius: 10px !important;
+        border: none !important;
     }
 
     /* Result box */
     .result-box {
         text-align: center;
-        padding: 1.5rem;
-        border-radius: 16px;
+        padding: 1.8rem;
+        border-radius: 20px;
         margin-top: 0.5rem;
     }
     .result-female {
@@ -70,7 +141,8 @@ st.markdown("""
         border: 1px solid #93C5FD;
     }
     .result-label {
-        font-size: 32px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 34px;
         font-weight: 800;
         color: #1E293B;
         margin-bottom: 0.2rem;
@@ -80,16 +152,46 @@ st.markdown("""
         color: #475569;
     }
 
-    /* Badge */
-    .badge {
-        display: inline-block;
-        background: #EEF2FF;
-        color: #4338CA;
-        padding: 4px 12px;
-        border-radius: 999px;
-        font-size: 12px;
+    /* Metric restyle */
+    div[data-testid="stMetric"] {
+        background: white;
+        border-radius: 14px;
+        padding: 0.8rem 1rem;
+        border: 1px solid #EDE9FE;
+        box-shadow: 0 4px 14px rgba(109, 40, 217, 0.08);
+    }
+    div[data-testid="stMetricValue"] {
+        color: var(--primary);
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Progress bar */
+    div[data-testid="stProgress"] > div > div {
+        background: linear-gradient(90deg, var(--primary), var(--accent)) !important;
+    }
+
+    /* Buttons in general */
+    .stButton > button {
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        color: white;
+        border: none;
+        border-radius: 10px;
         font-weight: 600;
-        margin: 4px 4px 0 0;
+        padding: 0.5rem 1.2rem;
+    }
+    .stButton > button:hover {
+        opacity: 0.9;
+        color: white;
+    }
+
+    /* Alerts (info/success/warning/error) rounder + softer */
+    div[data-testid="stAlert"] {
+        border-radius: 14px;
+    }
+
+    /* Slider accent */
+    div[data-testid="stSlider"] span {
+        color: var(--primary);
     }
 
     /* Footer */
@@ -97,11 +199,7 @@ st.markdown("""
         text-align: center;
         color: #94A3B8;
         font-size: 13px;
-        padding-top: 1rem;
-    }
-
-    div[data-testid="stMetricValue"] {
-        color: #1E3A8A;
+        padding-top: 1.2rem;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -150,12 +248,12 @@ with st.sidebar:
 # ------------------------------
 # Load Model
 # ------------------------------
-# MODEL_PATH = "PROJECT_09_MALE_FEMALE_EYE_DETECTION/my_model.keras"
+MODEL_PATH = "PROJECT_09_MALE_FEMALE_EYE_DETECTION/my_model.keras"
 
 @st.cache_resource(show_spinner=False)
 def load_model():
     try:
-        model = tf.keras.models.load_model("PROJECT_09_MALE_FEMALE_EYE_DETECTION/my_model.keras")
+        model = tf.keras.models.load_model(MODEL_PATH)
         return model, None
     except Exception as e:
         return None, str(e)
@@ -274,7 +372,7 @@ with col2:
     st.markdown('<div class="card">', unsafe_allow_html=True)
     st.markdown("#### 🔗 Connect with Me")
     st.markdown("[💼 LinkedIn](https://www.linkedin.com/in/vivek-srivastava-0a878a329)")
-    st.markdown("[💻 GitHub](https://github.com/viveksrivastava045-cyber/AIML_projects/edit/main/PROJECT_09_MALE_FEMALE_EYE_DETECTION)")
+    st.markdown("[💻 GitHub](https://github.com/viveksrivastava045-cyber/AIML_projects)")
     st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown("""
@@ -282,153 +380,3 @@ st.markdown("""
     Made with ❤️ using TensorFlow & Streamlit
 </div>
 """, unsafe_allow_html=True)
-# import streamlit as st
-# import tensorflow as tf
-# import numpy as np
-# from PIL import Image
-
-# # ------------------------------
-# # Page Configuration
-# # ------------------------------
-# st.set_page_config(
-#     page_title="Male/Female Eye Detection",
-#     page_icon="👁️",
-#     layout="wide"
-# )
-
-# # ------------------------------
-# # Custom CSS
-# # ------------------------------
-# st.markdown("""
-# <style>
-# .main{
-#     background:#F8FAFC;
-# }
-# .title{
-#     text-align:center;
-#     font-size:42px;
-#     font-weight:bold;
-#     color:#1E3A8A;
-# }
-# .subtitle{
-#     text-align:center;
-#     font-size:18px;
-#     color:gray;
-# }
-# .result{
-#     font-size:30px;
-#     font-weight:bold;
-#     text-align:center;
-# }
-# </style>
-# """, unsafe_allow_html=True)
-
-# st.markdown("<div class='title'>👁️ Male & Female Eye Detection</div>", unsafe_allow_html=True)
-# st.markdown("<div class='subtitle'>Deep Learning | TensorFlow | Streamlit</div>", unsafe_allow_html=True)
-
-# # ------------------------------
-# # Load Model
-# # ------------------------------
-# @st.cache_resource
-# def load_model():
-#     return tf.keras.models.load_model("PROJECT_09_MALE_FEMALE_EYE_DETECTION/my_model.keras")
-
-# model = load_model()
-
-# # ------------------------------
-# # Prediction Function
-# # ------------------------------
-# def predict(img):
-
-#     img = img.resize((299,299))
-
-#     img = np.array(img)
-
-#     if img.shape[-1] == 4:
-#         img = img[:,:,:3]
-
-#     img = img.astype("float32") / 255.0
-
-#     img = np.expand_dims(img, axis=0)
-
-#     prediction = model.predict(img)
-
-#     probability = float(prediction[0][0])
-
-#     if probability > 0.5:
-#         label = "👩 Female Eye"
-#         confidence = probability
-#     else:
-#         label = "👨 Male Eye"
-#         confidence = 1 - probability
-
-#     return label, confidence
-
-
-# # ------------------------------
-# # Upload Image
-# # ------------------------------
-# uploaded = st.file_uploader(
-#     "Upload an Eye Image",
-#     type=["jpg","jpeg","png"]
-# )
-
-# if uploaded:
-
-#     image = Image.open(uploaded)
-
-#     col1,col2 = st.columns(2)
-
-#     with col1:
-#         st.image(image, caption="Uploaded Image", use_container_width=True)
-
-#     with st.spinner("Predicting..."):
-
-#         label, confidence = predict(image)
-
-#     with col2:
-
-#         st.success("Prediction Completed")
-
-#         st.markdown(
-#             f"<div class='result'>{label}</div>",
-#             unsafe_allow_html=True
-#         )
-
-#         st.metric(
-#             "Confidence",
-#             f"{confidence*100:.2f}%"
-#         )
-
-#         st.progress(float(confidence))
-
-# st.markdown("---")
-# # ----------------------------
-# # Developer Corner
-# # ----------------------------
-
-# st.markdown("---")
-# st.subheader("👨‍💻 Developer Corner")
-
-# col1, col2 = st.columns(2)
-
-# with col1:
-#     st.markdown("### 👤 Developer")
-#     st.write("**Vivek Srivastava**")
-#     st.write("B.Tech IT ")
-#     st.write("Machine Learning & Data Science Enthusiast")
-
-# with col2:
-#     st.markdown("### 🔗 Connect with Me")
-#     st.markdown("[💼 LinkedIn](https://www.linkedin.com/in/vivek-srivastava-0a878a329)")
-#     st.markdown("[💻 GitHub](https://github.com/viveksrivastava045-cyber/AIML_projects/edit/main/PROJECT_03_CANADA_per_capita_income)")
-
-# st.markdown("---")
-# st.markdown(
-# """
-# <center>
-# Made with ❤️ using TensorFlow & Streamlit
-# </center>
-# """,
-# unsafe_allow_html=True
-# )
