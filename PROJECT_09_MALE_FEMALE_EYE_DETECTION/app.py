@@ -355,12 +355,12 @@ with st.sidebar:
 # ------------------------------
 # Load Model
 # ------------------------------
-MODEL_PATH = "PROJECT_09_MALE_FEMALE_EYE_DETECTION/my_model.keras"
+# MODEL_PATH = "PROJECT_09_MALE_FEMALE_EYE_DETECTION/my_model.keras"
 
 @st.cache_resource(show_spinner=False)
 def load_model():
     try:
-        model = tf.keras.models.load_model(MODEL_PATH)
+        model = tf.keras.models.load_model("PROJECT_09_MALE_FEMALE_EYE_DETECTION/my_model.keras")
         return model, None
     except Exception as e:
         return None, str(e)
