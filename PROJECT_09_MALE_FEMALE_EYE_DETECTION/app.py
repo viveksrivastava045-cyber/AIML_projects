@@ -201,6 +201,20 @@ st.markdown("""
         font-size: 13px;
         padding-top: 1.2rem;
     }
+    .custom-title {
+        color: #4A154B; /* A deep purple that stands out */
+        font-size: 40px;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+    .developer-name {
+        color: #1E1E1E; /* A solid contrast dark gray/black */
+        font-size: 24px;
+        font-weight: 600;
+        background-color: #F0F2F6; /* Optional light background badge effect */
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
