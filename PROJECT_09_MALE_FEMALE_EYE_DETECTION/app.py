@@ -18,202 +18,295 @@ st.set_page_config(
 # Custom CSS
 # ------------------------------
 st.markdown("""
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
     :root {
-        --ink: #1E1B4B;
-        --muted: #6B7280;
-        --primary: #6D28D9;
-        --primary-dark: #4C1D95;
-        --accent: #F472B6;
-        --bg-a: #F5F3FF;
-        --bg-b: #FDF2F8;
+        --bg: #0B1020;
+        --bg-soft: #121933;
+        --panel: rgba(18, 25, 51, 0.78);
+        --panel-strong: rgba(15, 23, 42, 0.92);
+        --surface: #F8FAFC;
+        --surface-2: #E2E8F0;
+        --text: #E5EEF8;
+        --text-muted: #A8B3C7;
+        --text-dark: #0F172A;
+        --primary: #14B8A6;
+        --primary-strong: #0F766E;
+        --secondary: #38BDF8;
+        --accent: #8B5CF6;
+        --success: #16A34A;
+        --warning: #F59E0B;
+        --female-bg: linear-gradient(135deg, rgba(244, 114, 182, 0.18), rgba(139, 92, 246, 0.18));
+        --female-border: rgba(244, 114, 182, 0.35);
+        --male-bg: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(20, 184, 166, 0.16));
+        --male-border: rgba(56, 189, 248, 0.35);
+        --shadow: 0 18px 50px rgba(2, 8, 23, 0.35);
+        --radius-lg: 22px;
+        --radius-md: 16px;
+        --radius-sm: 12px;
     }
 
     html, body, [class*="css"] {
-        font-family: 'Inter', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
-    /* Overall page background */
     .stApp {
-        background: linear-gradient(160deg, var(--bg-a) 0%, #F0F2F6 45%, var(--bg-b) 100%);
+        color: var(--text);
+        background:
+            radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 28%),
+            radial-gradient(circle at top right, rgba(139, 92, 246, 0.18), transparent 24%),
+            linear-gradient(145deg, #08111F 0%, #0B1020 42%, #111C35 100%);
     }
 
-    /* Hide default streamlit branding clutter */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
-    header[data-testid="stHeader"] {background: rgba(0,9,0,0);}
+    header[data-testid="stHeader"] {
+        background: transparent;
+    }
 
-    /* Sidebar */
+    .block-container {
+        padding-top: 1.2rem;
+        padding-bottom: 2rem;
+    }
+
     section[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, var(--primary-dark), #2E1065);
+        background: linear-gradient(180deg, #0F172A 0%, #111827 100%);
+        border-right: 1px solid rgba(148, 163, 184, 0.16);
     }
     section[data-testid="stSidebar"] * {
-        color: #EDE9FE !important;
+        color: #E2E8F0 !important;
+    }
+    section[data-testid="stSidebar"] .stSlider label,
+    section[data-testid="stSidebar"] .stMarkdown,
+    section[data-testid="stSidebar"] p {
+        color: #CBD5E1 !important;
     }
     section[data-testid="stSidebar"] hr {
-        border-color: rgba(255,255,255,0.15);
+        border-color: rgba(148, 163, 184, 0.18);
     }
 
-    /* Hero header */
     .hero {
+        position: relative;
+        overflow: hidden;
+        border-radius: 28px;
+        padding: 2.5rem 2rem 2rem 2rem;
+        margin-bottom: 1.2rem;
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(17, 24, 39, 0.78));
+        border: 1px solid rgba(148, 163, 184, 0.14);
+        box-shadow: var(--shadow);
         text-align: center;
-        padding: 2rem 1rem 1.2rem 1rem;
+    }
+    .hero::before {
+        content: "";
+        position: absolute;
+        inset: auto -60px -70px auto;
+        width: 220px;
+        height: 220px;
+        background: radial-gradient(circle, rgba(20, 184, 166, 0.35), transparent 65%);
+        pointer-events: none;
+    }
+    .hero::after {
+        content: "";
+        position: absolute;
+        inset: -70px auto auto -60px;
+        width: 220px;
+        height: 220px;
+        background: radial-gradient(circle, rgba(139, 92, 246, 0.22), transparent 65%);
+        pointer-events: none;
     }
     .hero-title {
-        font-family: 'Poppins', sans-serif;
-        font-size: 48px;
+        position: relative;
+        z-index: 1;
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(2rem, 2.7vw, 3.4rem);
         font-weight: 800;
-        background: linear-gradient(90deg, var(--primary), var(--accent));
+        letter-spacing: -0.03em;
+        line-height: 1.05;
+        color: #F8FAFC;
+        margin-bottom: 0.55rem;
+    }
+    .hero-title .highlight {
+        background: linear-gradient(90deg, #67E8F9 0%, #2DD4BF 45%, #A78BFA 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        margin-bottom: 0.3rem;
+        background-clip: text;
     }
     .hero-subtitle {
-        font-size: 17px;
-        color: var(--muted);
-        font-weight: 500;
+        position: relative;
+        z-index: 1;
+        max-width: 760px;
+        margin: 0 auto;
+        color: var(--text-muted);
+        font-size: 1rem;
+        line-height: 1.7;
     }
 
-    /* Badge */
+    .badge-row {
+        position: relative;
+        z-index: 1;
+        margin-top: 1rem;
+    }
     .badge {
         display: inline-block;
-        background: white;
-        color: var(--primary);
-        padding: 5px 14px;
+        margin: 0.3rem 0.35rem 0 0.35rem;
+        padding: 0.5rem 0.95rem;
         border-radius: 999px;
-        font-size: 12px;
+        background: rgba(148, 163, 184, 0.12);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        color: #E2E8F0;
+        font-size: 0.82rem;
         font-weight: 600;
-        margin: 6px 4px 0 0;
-        box-shadow: 0 2px 8px rgba(109, 40, 217, 0.15);
-        border: 1px solid #E9D5FF;
+        letter-spacing: 0.01em;
     }
 
-    /* Card container */
+    .section-title, h3 {
+        font-family: 'Outfit', sans-serif !important;
+        color: #F8FAFC !important;
+        letter-spacing: -0.02em;
+    }
+
     .card {
-        background: rgba(255,255,255,0.85);
-        backdrop-filter: blur(6px);
-        border-radius: 20px;
-        padding: 1.5rem;
-        box-shadow: 0 8px 30px rgba(109, 40, 217, 0.10);
-        border: 1px solid #EDE9FE;
+        background: var(--panel);
+        backdrop-filter: blur(14px);
+        border: 1px solid rgba(148, 163, 184, 0.14);
+        border-radius: var(--radius-lg);
+        padding: 1.35rem;
+        box-shadow: var(--shadow);
+        height: 100%;
     }
-    .card h4 {
-        font-family: 'Poppins', sans-serif;
-        color: var(--ink);
+    .card h4, .card h5 {
+        font-family: 'Outfit', sans-serif;
+        color: #F8FAFC;
+        margin-bottom: 0.35rem;
+        letter-spacing: -0.02em;
+    }
+    .card p, .card li, .card .stCaption {
+        color: var(--text-muted);
     }
 
-    /* Section headers written with st.markdown("### ...") */
-    h3 {
-        font-family: 'Poppins', sans-serif !important;
-        color: var(--ink) !important;
-    }
-
-    /* File uploader restyle */
     div[data-testid="stFileUploaderDropzone"] {
-        background: linear-gradient(135deg, #F5F3FF, #FDF2F8);
-        border: 2px dashed #C4B5FD;
-        border-radius: 18px;
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.78));
+        border: 2px dashed rgba(45, 212, 191, 0.45);
+        border-radius: 20px;
+        padding: 1rem;
+    }
+    div[data-testid="stFileUploaderDropzone"] * {
+        color: #DDEAF7 !important;
     }
     div[data-testid="stFileUploaderDropzone"]:hover {
-        border-color: var(--primary);
+        border-color: #67E8F9;
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(17, 24, 39, 0.92));
     }
     div[data-testid="stFileUploaderDropzone"] button {
-        background: var(--primary) !important;
+        background: linear-gradient(90deg, var(--primary), var(--secondary)) !important;
         color: white !important;
-        border-radius: 10px !important;
+        border-radius: 12px !important;
         border: none !important;
+        font-weight: 700 !important;
     }
 
-    /* Result box */
     .result-box {
         text-align: center;
-        padding: 1.8rem;
+        padding: 1.5rem;
         border-radius: 20px;
         margin-top: 0.5rem;
+        border: 1px solid transparent;
     }
     .result-female {
-        background: linear-gradient(135deg, #FDE7F3, #FBCFE8);
-        border: 1px solid #F9A8D4;
+        background: var(--female-bg);
+        border-color: var(--female-border);
     }
     .result-male {
-        background: linear-gradient(135deg, #DBEAFE, #BFDBFE);
-        border: 1px solid #93C5FD;
+        background: var(--male-bg);
+        border-color: var(--male-border);
     }
     .result-label {
-        font-family: 'Poppins', sans-serif;
-        font-size: 34px;
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(1.8rem, 2.1vw, 2.4rem);
         font-weight: 800;
-        color: #1E293B;
+        color: #F8FAFC;
         margin-bottom: 0.2rem;
+        letter-spacing: -0.03em;
     }
     .result-sub {
-        font-size: 14px;
-        color: #475569;
+        font-size: 0.98rem;
+        color: #D7E4F3;
     }
 
-    /* Metric restyle */
     div[data-testid="stMetric"] {
-        background: white;
-        border-radius: 14px;
-        padding: 0.8rem 1rem;
-        border: 1px solid #EDE9FE;
-        box-shadow: 0 4px 14px rgba(109, 40, 217, 0.08);
+        background: rgba(15, 23, 42, 0.7);
+        border: 1px solid rgba(148, 163, 184, 0.14);
+        border-radius: 16px;
+        padding: 0.9rem 1rem;
+        box-shadow: 0 10px 24px rgba(2, 8, 23, 0.25);
+    }
+    div[data-testid="stMetricLabel"] {
+        color: #B6C2D3 !important;
     }
     div[data-testid="stMetricValue"] {
-        color: var(--primary);
-        font-family: 'Poppins', sans-serif;
+        color: #7DD3FC;
+        font-family: 'Outfit', sans-serif;
     }
 
-    /* Progress bar */
     div[data-testid="stProgress"] > div > div {
-        background: linear-gradient(90deg, var(--primary), var(--accent)) !important;
+        background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent)) !important;
     }
 
-    /* Buttons in general */
     .stButton > button {
-        background: linear-gradient(90deg, var(--primary), var(--accent));
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
         color: white;
         border: none;
-        border-radius: 10px;
-        font-weight: 600;
-        padding: 0.5rem 1.2rem;
+        border-radius: 12px;
+        font-weight: 700;
+        padding: 0.6rem 1.2rem;
+        box-shadow: 0 10px 22px rgba(20, 184, 166, 0.24);
     }
     .stButton > button:hover {
-        opacity: 0.9;
         color: white;
+        transform: translateY(-1px);
+        box-shadow: 0 14px 28px rgba(20, 184, 166, 0.32);
     }
 
-    /* Alerts (info/success/warning/error) rounder + softer */
     div[data-testid="stAlert"] {
-        border-radius: 14px;
+        border-radius: 16px;
+        border: 1px solid rgba(148, 163, 184, 0.12);
     }
 
-    /* Slider accent */
-    div[data-testid="stSlider"] span {
-        color: var(--primary);
-    }
-
-    /* Footer */
     .footer-note {
         text-align: center;
         color: #94A3B8;
-        font-size: 13px;
-        padding-top: 1.2rem;
+        font-size: 0.9rem;
+        padding-top: 1rem;
     }
-    .custom-title {
-        color: #4A154B; /* A deep purple that stands out */
-        font-size: 40px;
-        font-weight: bold;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+
+    .dev-name {
+        display: inline-block;
+        padding: 0.45rem 0.85rem;
+        border-radius: 999px;
+        background: rgba(20, 184, 166, 0.14);
+        color: #DFFCF7;
+        border: 1px solid rgba(45, 212, 191, 0.24);
+        font-weight: 700;
+        margin-bottom: 0.7rem;
     }
-    .developer-name {
-        color: #1E1E1E; /* A solid contrast dark gray/black */
-        font-size: 24px;
-        font-weight: 600;
-        background-color: #F0F2F6; /* Optional light background badge effect */
-        padding: 5px 10px;
-        border-radius: 5px;
+
+    .muted-text {
+        color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+        .hero {
+            padding: 1.6rem 1rem 1.4rem 1rem;
+            border-radius: 22px;
+        }
+        .hero-subtitle {
+            font-size: 0.95rem;
+        }
+        .card {
+            padding: 1rem;
+        }
     }
 </style>
 """, unsafe_allow_html=True)
@@ -223,15 +316,15 @@ st.markdown("""
 # ------------------------------
 st.markdown("""
 <div class="hero">
-    <div class="hero-title">👁️ Eye Gender Detection</div>
-    <div class="hero-subtitle">Upload a close-up eye image and let a deep learning model predict male / female</div>
-    <span class="badge">TensorFlow</span>
-    <span class="badge">Streamlit</span>
-    <span class="badge">CNN Classifier</span>
+    <div class="hero-title">👁️ <span class="highlight">Eye Gender Detection</span></div>
+    <div class="hero-subtitle">Upload a clear close-up eye image and get a polished deep learning prediction with readable confidence details and a cleaner visual experience.</div>
+    <div class="badge-row">
+        <span class="badge">TensorFlow</span>
+        <span class="badge">Streamlit</span>
+        <span class="badge">CNN Classifier</span>
+    </div>
 </div>
 """, unsafe_allow_html=True)
-
-st.write("")
 
 # ------------------------------
 # Sidebar
@@ -246,8 +339,8 @@ with st.sidebar:
     st.subheader("📌 How to use")
     st.markdown(
         "1. Upload a clear, close-up eye image (jpg/png)\n"
-        "2. Wait for the model to process it\n"
-        "3. View the predicted label and confidence score"
+        "2. Wait a moment while the model analyzes it\n"
+        "3. Review the predicted label and confidence score"
     )
     st.markdown("---")
     st.subheader("⚙️ Model info")
@@ -262,12 +355,12 @@ with st.sidebar:
 # ------------------------------
 # Load Model
 # ------------------------------
-# MODEL_PATH = "PROJECT_09_MALE_FEMALE_EYE_DETECTION/my_model.keras"
+MODEL_PATH = "PROJECT_09_MALE_FEMALE_EYE_DETECTION/my_model.keras"
 
 @st.cache_resource(show_spinner=False)
 def load_model():
     try:
-        model = tf.keras.models.load_model("PROJECT_09_MALE_FEMALE_EYE_DETECTION/my_model.keras")
+        model = tf.keras.models.load_model(MODEL_PATH)
         return model, None
     except Exception as e:
         return None, str(e)
@@ -316,7 +409,7 @@ if uploaded is not None:
     try:
         image = Image.open(uploaded)
     except Exception:
-        st.error("⚠️ Couldn't read this file as an image. Please upload a valid jpg/jpeg/png.")
+        st.error("⚠️ Couldn't read this file as an image. Please upload a valid jpg/jpeg/png file.")
         st.stop()
 
     col1, col2 = st.columns(2, gap="large")
@@ -333,12 +426,12 @@ if uploaded is not None:
         st.markdown("#### 🔮 Prediction")
 
         progress_bar = st.progress(0, text="Analyzing image...")
-        for pct in (25, 55, 80):
+        for pct in (22, 47, 74, 92):
             time.sleep(0.12)
             progress_bar.progress(pct, text="Analyzing image...")
 
         label, emoji, confidence = predict(image)
-        progress_bar.progress(100, text="Done")
+        progress_bar.progress(100, text="Analysis complete")
         time.sleep(0.15)
         progress_bar.empty()
 
@@ -356,8 +449,8 @@ if uploaded is not None:
 
         if confidence * 100 < confidence_threshold:
             st.warning(
-                f"⚠️ Confidence is below your set threshold of {confidence_threshold}%. "
-                "Try a clearer, well-lit close-up eye image for a more reliable result."
+                f"⚠️ Confidence is below your selected threshold of {confidence_threshold}%. "
+                "Try a brighter, sharper, and more centered close-up eye image for a stronger result."
             )
         else:
             st.success("✅ Prediction completed with good confidence.")
@@ -371,13 +464,13 @@ st.markdown("---")
 # ------------------------------
 # Developer Corner
 # ------------------------------
-st.subheader("👨‍💻 Developer Corner")
+st.markdown("### 👨‍💻 Developer Corner")
 col1, col2 = st.columns(2, gap="large")
 
 with col1:
     st.markdown('<div class="card">', unsafe_allow_html=True)
     st.markdown("#### 👤 Developer")
-    st.write("**Vivek Srivastava**")
+    st.markdown('<div class="dev-name">Vivek Srivastava</div>', unsafe_allow_html=True)
     st.write("B.Tech IT")
     st.write("Machine Learning & Data Science Enthusiast")
     st.markdown('</div>', unsafe_allow_html=True)
