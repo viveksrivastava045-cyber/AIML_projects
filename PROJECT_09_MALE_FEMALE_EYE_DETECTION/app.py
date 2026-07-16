@@ -36,7 +36,7 @@ st.markdown("""
 
     /* Overall page background */
     .stApp {
-        background: linear-gradient(160deg, var(--bg-a) 0%, #FFFFFF 45%, var(--bg-b) 100%);
+        background: linear-gradient(160deg, var(--bg-a) 0%, #F0F2F6 45%, var(--bg-b) 100%);
     }
 
     /* Hide default streamlit branding clutter */
