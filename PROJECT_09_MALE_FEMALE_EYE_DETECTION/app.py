@@ -479,7 +479,7 @@ with col2:
     st.markdown('<div class="card">', unsafe_allow_html=True)
     st.markdown("#### 🔗 Connect with Me")
     st.markdown("[💼 LinkedIn](https://www.linkedin.com/in/vivek-srivastava-0a878a329)")
-    st.markdown("[💻 GitHub](https://github.com/viveksrivastava045-cyber/AIML_projects)")
+    st.markdown("[💻 GitHub](https://github.com/viveksrivastava045-cyber/AIML_projects/tree/main/PROJECT_09_MALE_FEMALE_EYE_DETECTION)")
     st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown("""
